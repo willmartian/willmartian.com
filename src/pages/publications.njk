@@ -1,0 +1,18 @@
+---
+  title: Publications
+---
+
+<ol class="pub-list">
+  {% for pub in publications %}
+    <li>
+      <details>
+        <summary>{{ pub.citation | safe }}</summary>
+        <article>
+          {% if pub.PDF %}<a href={{ pub.PDF }}>PDF</a>{% endif %}
+          {% if pub.DOI %}<a href={{ pub.DOI }}>DOI</a>{% endif %}
+          {% if pub.abstract %}<p>{{ pub.abstract | safe }}</p>{% endif %}
+        </article>
+      </details>
+    </li>
+  {% endfor %}
+</ol>

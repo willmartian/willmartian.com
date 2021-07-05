@@ -1,0 +1,21 @@
+---
+  title: Posts
+  useVue: true
+---
+
+<p>This is an archive of everything I post, filterable by <a rel="external" href="https://indieweb.org/posts">post type.</a></p>
+
+<form>
+  {% for tag in collections.tagList %}
+    <div>
+      <label>{{ tag }}</label>
+      <input id="" name="" type="checkbox">
+    </div>
+  {% endfor %}
+</form>
+
+<ul>
+  {% for post in collections.posts %}
+    <li>{{ post.data.title }}</li>
+  {% endfor %}
+</ul>
