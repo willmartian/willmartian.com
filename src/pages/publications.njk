@@ -5,7 +5,10 @@
 <ol class="pub-list">
   {% for pub in publications %}
     <li>
-      <details>
+      <details
+        class="card no-hover"
+        {% if loop.index == 1 %} open {% endif %}
+      >
         <summary>{{ pub.citation | safe }}</summary>
         <article>
           {% if pub.PDF %}<a href={{ pub.PDF }}>PDF</a>{% endif %}

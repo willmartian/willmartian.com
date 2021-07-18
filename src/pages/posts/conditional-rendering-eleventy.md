@@ -1,14 +1,15 @@
 ---
 title: "Conditionally Rendering JavaScript Templates in Eleventy"
-description: "Show this if that, but dont show this unless both of those."
+blurb: "Show this if that, but dont show this unless both of those."
 date: 2021-02-06
 usePrism: true
 tags:
   - articles
   - eleventy
+  - tutorial
 ---
 
-Sometimes, we want display content on a website only if certain conditions are met. This is known as *conditional rendering.*
+Sometimes, we want to display content on a website only when certain conditions are met. This is known as *conditional rendering.*
 
 A very common use case for this is content navigation links at the bottom of a blog post. We only want to link to the *Next Post* if it exists, likewise for the *Previous Post*. 
 
@@ -207,5 +208,3 @@ However, I find that I often forget to escape null, false, and undefined when wr
 
   module.exports = Post;
 ```
-
-Wanna see how it looks? Well, look around!

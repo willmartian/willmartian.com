@@ -1,23 +1,32 @@
 ---
+  title: Home | WillMartian.com
   layout: base.njk
 ---
 
 <main>
-  <h1 class="title">will marti<span>a</span>n</h1>
-  <p class="lead">I am a web developer, open source advocate, climate change realist, and democratic socialist.</p>
+  <h1 class="title">w://marti<span>a</span>n</h1>
+  <p class="lead">I am a researcher, web developer, open source advocate, climate change realist, and democratic socialist.</p>
   <ul class="social-list">
-    <li><a href="#">GitHub</a></li>
-    <li><a href="#">LinkedIn</a></li>
-    <li><a href="#">Twitter</a></li>
+    <li>
+      <a href="#">
+        <ion-icon name="logo-github" size="large" alt="GitHub"></ion-icon>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <ion-icon name="logo-linkedin" size="large"></ion-icon>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <ion-icon name="logo-twitter" size="large"></ion-icon>
+      </a>
+    </li>
   </ul>
-
-  <section>
-    <h2>Featured Post</h2>
-    <p>...</p>
-  </section>
+  <hr>
 
   <section>
     <h2>Latest Post</h2>
-    <p>...</p>
+    {% postCard collections.posts | last %}
   </section>
 </main>
