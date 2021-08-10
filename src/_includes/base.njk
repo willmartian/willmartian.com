@@ -16,9 +16,8 @@
   {% endif %}
 </head>
 <body>
+  {% include "nav.njk" %}
   <div class="inner-container">
-    {% include "nav.njk" %}
-
     {{ content | safe }}
 
     {% include "footer.njk" %}

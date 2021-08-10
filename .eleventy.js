@@ -21,7 +21,9 @@ module.exports = function (eleventyConfig) {
           <h3>${post.data.title}</h3>
         </header>
         <div>${post.data.blurb}</div>
-        <footer>${post.data.date}</footer>
+        <footer>${post.data.date.toLocaleDateString(undefined, {
+          year: 'numeric', month: 'long', day: 'numeric'
+        })}</footer>
       </article>
     </a>`;
   });

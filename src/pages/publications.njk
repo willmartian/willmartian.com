@@ -1,5 +1,5 @@
 ---
-  title: Publications
+  title: publications
 ---
 
 <ol class="pub-list">
@@ -7,12 +7,15 @@
     <li>
       <details
         class="card no-hover"
-        {% if loop.index == 1 %} open {% endif %}
       >
         <summary>{{ pub.citation | safe }}</summary>
         <article>
-          {% if pub.PDF %}<a href={{ pub.PDF }}>PDF</a>{% endif %}
-          {% if pub.DOI %}<a href={{ pub.DOI }}>DOI</a>{% endif %}
+          {% if pub.PDF or pub.DOI %}
+            <b>Links: </b>
+            {% if pub.PDF %}<a href={{ pub.PDF }}>PDF</a>{% endif %}
+            {% if pub.DOI %}<a href={{ pub.DOI }}>DOI</a>{% endif %}
+          {% endif %}
+          
           {% if pub.abstract %}<p>{{ pub.abstract | safe }}</p>{% endif %}
         </article>
       </details>

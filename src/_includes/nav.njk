@@ -13,7 +13,7 @@
       <a 
         {% if currentUrl === page.url %}aria-current="page"{% endif %} 
         href="{{ page.url }}">
-          {{ page.data.title }}
+          {{ page.data.title.toLowerCase() }}
       </a>
     </li>
     {%- endfor %}
