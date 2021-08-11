@@ -82,6 +82,11 @@ main {
   padding: .75rem;
 }
 
+.global-nav a:not([aria-current="page"]) {
+  color: var(--color-primary);
+  text-decoration-color: var(--color-primary);
+}
+
 a {
   color: var(--color-primary);
   text-decoration: underline;

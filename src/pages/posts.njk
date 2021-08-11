@@ -2,7 +2,7 @@
   title: posts
 ---
 
-<p>This is an archive of everything I post, filterable by <a rel="external" href="https://indieweb.org/posts">post type.</a></p>
+<p id="post-preamble">This is an archive of everything I post, filterable by tag type.</a></p>
 
 <form>
   {% for tag in collections.tagList %}
@@ -39,3 +39,11 @@
     })
   }
 </script>
+
+<noscript>
+  <style>
+    #post-preamble, form {
+      display: none;
+    }
+  </style>
+<noscript>
