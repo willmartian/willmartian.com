@@ -3,9 +3,8 @@
 
   --color-background: #fff;
   --color-primary: #236ebf;
-  --color-secondary: #a44185;
+  --color-secondary: #3a975e;
   --color-backdrop: rgba(242,242,242,0.5);
-  /* --color-text: #134769; */
   --color-text: #012339;
   --color-muted: #e0ecf1;
 
@@ -13,7 +12,6 @@
 
 html, body {
   height: 100%;
-  /* background-color: rgb(242, 242, 242); */
   color: var(--color-text);
   background-color: var(--background-light);
   line-height: 1.75em;
@@ -245,6 +243,7 @@ a[rel="external"]::after {
 
 .tag-toggle {
   display: inline;
+  cursor: pointer;
 }
 
 .tag-toggle label {
