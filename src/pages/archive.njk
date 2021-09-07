@@ -1,10 +1,8 @@
 ---
-  title: posts
+  title: archive
 ---
 
-<p id="post-preamble">This is an archive of everything I post, filterable by tag type.</a></p>
-
-<form>
+<form id="tag-list">
   {% for tag in collections.tagList %}
     <div class="tag-toggle">
       <input id="{{ tag }}" name="{{ tag }}" type="checkbox">
@@ -31,10 +29,17 @@
     const checked = inputs.filter(input => input.checked);
     
     [...document.querySelectorAll('.post-entry')].forEach(entry => {
-      checked.length === 0 
-      ? entry.hidden = false 
-      : checked.forEach(tag => {
-        entry.hidden = entry.dataset.tags.includes(tag.id) ? false : true; 
+      let isHidden = 0;
+
+      if (checked.length === 0) {
+        entry.hidden = false;
+      }
+
+      checked.forEach(tag => {
+        if (entry.dataset.tags.includes(tag.id)) {
+          isHidden += 1;
+        }
+        entry.hidden = checked.length !== isHidden; 
       })
     })
   }

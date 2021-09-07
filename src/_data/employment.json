@@ -1,0 +1,51 @@
+[
+  {
+    "employer": "Ionic",
+    "title": "Software Engineer",
+    "start": "March 2021",
+    "end": "Present",
+    "location": "Remote"
+  },
+  {
+    "employer": "Florida Center for Interactive Media",
+    "title": "Web Application Developer",
+    "start": "October 2020",
+    "end": "March 2021",
+    "location": "Remote"
+  },
+  {
+    "employer": "Virginia Modeling, Analysis, and Simulation Center",
+    "title": "Research Associate",
+    "start": "January 2020",
+    "end": "September 2020",
+    "location": "Norfolk, Virginia"
+  },
+  {
+    "employer": "Expressive Machinery Lab",
+    "title": "Research Assistant",
+    "start": "May 2018",
+    "end": "December 2019",
+    "location": "Atlanta, Georgia"
+  },
+  {
+    "employer": "Adult Swim Games",
+    "title": "Production Assistant",
+    "start": "June 2019",
+    "end": "August 2019",
+    "location": "Atlanta, Georgia"
+  },
+  {
+    "employer": "Digital Integrative Liberal Arts Center (DILAC)",
+    "title": "Research Assistant",
+    "start": "August 2017",
+    "end": "December 2017",
+    "location": "Atlanta, Georgia"
+  },
+  {
+    "employer": "Cartoon Network Games",
+    "title": "Quality Assurance Analyst",
+    "start": "January 2017",
+    "end": "December 2017",
+    "location": "Atlanta, Georgia"
+  }
+]

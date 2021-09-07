@@ -5,11 +5,55 @@
 
 <main>
   <h1 class="title"><span>w://</span> marti<span>a</span>n</h1>
-  <p class="lead">I am a researcher, web developer, and open source advocate.</p>
-  <p>Sometimes I talk about those things on this website.</p> 
+  <p>I am a researcher, software developer, and open source advocate interested in the intersection of critical data studies, the learning sciences, and interactive technologies.</p>
 
   <section id="latest">
     <h2>Latest Post</h2>
     {% postCard collections.posts | last %}
+    <a href="/archive">View Archive</a>
   </section>
+
+  {# <section>
+    <h2>Projects</h2>
+  </section>
+
+  <section>
+    <h2>Publications</h2>
+    <ol>
+      {% for item in publications %}
+      <li>
+        <article>
+          {{ item.title }}
+        </article>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  
+  <section>
+    <h2>Education</h2>
+    <ol>
+      {% for item in education %}
+      <li>
+        <article>
+          {{ item.institution }}
+        </article>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <section>
+    <h2>Employment</h2>
+    <ol>
+      {% for item in employment %}
+      <li>
+        <article>
+          {{ item.employer }}
+        </article>
+      </li>
+      {% endfor %}
+    </ol>
+  </section> #}
 </main>
