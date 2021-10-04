@@ -54,6 +54,10 @@ h2::before {
   justify-content: space-between;
 }
 
+.inner-container img {
+  max-width: 100%;
+}
+
 footer img {
   max-height: 2rem;
   margin-left: .5rem;
