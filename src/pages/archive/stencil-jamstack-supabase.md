@@ -1,5 +1,5 @@
 ---
-title: "Building JAMStack with Stencil and Su: Dynamic JAMStack with Supabase"
+title: "Dynamic JAMStack with Stencil and Supabase"
 blurb: "Let's build a widget for user comments to our 11ty blog!"
 date: 2021-09-29
 usePrism: true
