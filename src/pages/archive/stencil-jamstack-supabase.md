@@ -11,6 +11,17 @@ tags:
 ---
 
 TODO: write more/better intro. Add screenshot/video/gif of final product. Run through a spell checker/grammar check. Check code blocks for synatx errors. Add component demo to bottom of page.
+https://jamstack.wtf/#history
+
+-html
+-static first then progressive
+-ssr
+-dev ex is important
+-WOOOO
+
+The JAMStack is a modern architecture for creating websites that focuses on 
+
+anything from small, personal static blogs to large, enterprise, dynamic store fronts. The title  
 
 Despite often being associated with static site generators, JAMstack sites do not need to do be *static.* In situations where prerendered markup does not suffice, dynamic content can be loaded on the client side. This process is known as commonly known as *hydration*. 
 
@@ -31,7 +42,7 @@ When I am building a component, I like to start out with writing an example of w
 ```
 ## Stencil Implementation
 
-Let's scaffold out a Stencil component with  `npm run scaffold my-comments` in a new Stencil project. This will set us up with a boilerplate, to which we can add public properties with the `@Prop` decorator and internal state with the `@State` decorator. For a deeper introduction to props and state, check out the [Stencil documentation](https://stenciljs.com/docs/properties).
+Let's scaffold out a Stencil component with  `npm run generate my-comments` in a new Stencil project. This will set us up with a boilerplate, to which we can add public properties with the `@Prop` decorator and internal state with the `@State` decorator. For a deeper introduction to props and state, check out the [Stencil documentation](https://stenciljs.com/docs/properties).
 
 ```tsx
   @Component({
@@ -62,7 +73,7 @@ Let's scaffold out a Stencil component with  `npm run scaffold my-comments` in a
     /**
      * Comments associated with this block's `id`.
      */
-    @State() comments: Comment[] = [];
+    @State() comments: MyComment[] = [];
 
     /**
      * Value of the new comment text input.
@@ -78,7 +89,7 @@ Let's scaffold out a Stencil component with  `npm run scaffold my-comments` in a
 The `this.comments` array we defined above will hold the comments data loaded from the Supabase backend. Let's define a `Comment` type so that we can utilize Stencil's built in TypeScript support.  
 
 ```ts
-  type Comment = {
+  type MyComment = {
     /*
      * The id of the author who wrote the comment.
      */
@@ -118,16 +129,19 @@ Now we are ready to think about what we need to render to the user:
 When building Stencil components with multiple moving parts, I find it helpful to seperate out semantically different templates into multiple render functions. The `renderComment` helper function will be used to render the markup for an individual comment. To make sure the comment is accessible, let's write it as an [HTML article element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article) with the [ARIA *comment* role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Comment_role). 
 
 ```tsx
-const renderComment = (comment: Comment) =>
-  <article role="comment">
-    <header>
-      <h1>{comment.author}</h1>
-    </header>
-    <p>{comment.content}</p>
-    <footer>
-      <small><time dateTime={comment.created_at}>{format(comment.created_at)}</time></small>
-    </footer>
-  </article>
+  private renderComment(comment: MyComment) {
+    return (
+      <article role="comment">
+        <header>
+          <h1>{comment.author_id}</h1>
+        </header>
+        <p>{comment.content}</p>
+        <footer>
+          <small><time dateTime={comment.created_at}>{comment.created_at}</time></small>
+        </footer>
+      </article>
+    );
+  }
 ```
 
 Now in our `render` function, we can call `renderComment` for each item in the `this.comments` state variable:
@@ -138,7 +152,7 @@ render() {
     <Host>
       <h1>Comments</h1>
 
-      {this.comments.map(comment => renderComment(comment))}
+      {this.comments.map(comment => this.renderComment(comment))}
     </Host>
   );
 }
@@ -168,7 +182,21 @@ render() {
 }
 ```
 
-Now we have a shell set up to display our comments, and props and state set up to hold our data. Let's configure Supabase to hold our comment data and wire it up to the compoents lifecycle events. 
+Now we have a shell set up to display our comments, and props and state set up to hold our data. Let's configure Supabase to hold our comment data and wire it up to the compoents lifecycle events.
+
+### Handling Input
+In the form template above, we referenced two methods to be implemented that handle user input. In the `handleChange` method we want to store the current value of the input element into component state. The `handleSubmit` method will be implemented in the next section.
+
+```ts
+  private handleChange(ev: Event) {
+    const target = ev.currentTarget as HTMLInputElement;
+    this.newCommentValue = target.value;
+  }
+
+  private handleSubmit(ev: Event) {
+    // TODO
+  }
+```
 
 ## Setting up Supabase
 
@@ -193,7 +221,7 @@ These values correspond to the `supabaseUrl` and `supabaseKey` props that were a
 
 **This tutorial does not cover setting up authetication, also provided by Supabase. Setting up proper authentication is neccessary to prevent unrestricted CRUD access to the database.**
 
-## Connecting Supabase CRUD to Component Lifecycle
+## Connecting Supabase to Stencil
 
 We need the component to interact with Supabase in three ways:
 
@@ -214,7 +242,7 @@ Supabase allows for chaining function calls to grab data from a table, filter ou
       .from('comments')
       .select()
       // Only grab data that is associated with this component's `id`.
-      .eq('location_id', this.el.id)
+      .eq('location_id', this.element.id)
       // Order the data such that new comments are the top of the list.
       .order('created_at', { ascending: false });
 
@@ -240,7 +268,7 @@ It would be nice if new comments were automatically shown in our comment list. S
   private async watchComments() {
     await this.supabase
       // Only watch updates that match our component's id
-      .from(`comments:location_id=eq.${this.el.id}`)
+      .from(`comments:location_id=eq.${this.element.id}`)
       // When a comment is inserted into the table, update the component state. 
       .on('INSERT', payload => {
         this.comments = [payload.new, ...this.comments];
@@ -269,8 +297,8 @@ The last piece of functionality we need is the ability to add new comments.
       .insert([
         {
           content: this.newCommentValue,
-          author: this.authorName,
-          location_id: this.el.id
+          author: 'Author Name', // Dummy value. (To be implemented when auth is added.)
+          location_id: this.element.id
           // Supabase will automatically generate `id` and `created_at`
         }
       ]);
@@ -292,6 +320,4 @@ Now, we need to call `addComment` whenever the form in our component's template 
 
 There are a couple of things not covered in this tutorial that are necessary before the component is ready for public use: authetication, more styles, admin capabilites... If you enjoyed this tutorial, leave a comment below if you would like to see more!
 
-The full project is also available on GitHub.
-
-TODO clean up outro. 
+The full project is also available on [GitHub](https://github.com/willmartian/my-comments).
