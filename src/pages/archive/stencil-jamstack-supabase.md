@@ -9,15 +9,17 @@ tags:
   - jamstack
   - tutorial
 ---
-The JAMstack is a modern architecture for creating websites that focus on performance and developer experience. It can be used for anything from personal static blogs to large, enterprise, dynamic storefronts. The JAM in JAMstack stands for JavaScript, API’s, and markup. Worded differently, static markup is transformed by JavaScript and utilizes third-party API’s at build time and run time. A comprehensive definition and history of JAMstack can be found [here.](https://jamstack.wtf/)
+The Jamstack is a modern architecture for creating websites that focus on performance and developer experience. It can be used for anything from personal static blogs to large, enterprise, dynamic storefronts. The *Jam* in Jamstack stands for JavaScript, API’s, and markup. Worded differently, static markup is transformed by JavaScript and utilizes third-party API’s at build time and run time. A comprehensive definition and history of Jamstack can be found [here.](https://jamstack.wtf/)
 
-Despite often being associated with static site generators, JAMstack sites do not need to do stay *static.* In situations where prerendered markup alone does not suffice, dynamic content can be progressively loaded on the client side. An online storefront might statically generate listings for all the products in their catalog, and then update details like inventory or price after the page is first rendered. Web components are a great fit for this workflow, because they allow for adding zones of interactivity within otherwise static HTML. 
+Despite often being associated with static site generators, Jamstack sites do not need to do stay *static.* In situations where prerendered markup alone does not suffice, dynamic content can be progressively loaded on the client side. An online storefront might statically generate listings for all the products in their catalog, and then update details like inventory or price after the page is first rendered. Web components are a great fit for this workflow, because they allow for adding zones of interactivity within otherwise static HTML.
 
-Let’s add user-generated comments to a JAMstack site with a web component created with Stencil that utilizes [Supabase](https://supabase.io/) to store dynamic data. Supabase is an open-source alternative to Firebase that provides an interface and API that makes database CRUD operations (creating, reading, updating and deleting) possible without writing backend code. I have been using it extensively in my personal projects, and I think combining it with Stencil's web components is a wonderful way to create [micro-frontends](https://micro-frontends.org/): dynamic, independent, contained widgets that can be dropped anywhere in a larger project (whether that is a SPA or a static HTML file).
+Let’s add user-generated comments to a Jamstack site with a web component created with Stencil that utilizes [Supabase](https://supabase.io/) to store dynamic data. Supabase is an open-source alternative to Firebase that provides an interface and API that makes database CRUD operations (creating, reading, updating and deleting) possible without writing backend code. I have been using it extensively in my personal projects, and I think combining it with Stencil's web components is a wonderful way to create [micro-frontends](https://micro-frontends.org/): dynamic, independent, contained widgets that can be dropped anywhere in a larger project (whether that is a SPA or a static HTML file).
 
 Here is a preview of the final component we will be creating:
 
 ![Comments component preview](/files/commentsScreenshot.png "Comments component preview")
+
+The full source is also available on [GitHub.](https://github.com/willmartian/my-comments)
 
 ## Usage
 When I am building a component, I like to start out with writing an example of what the end usage might look like. For our comments component, I want it to have a really low-config API: all that should be required to use the component is a unique ID, URL to our backend, and access token for Supabase.
@@ -78,7 +80,7 @@ export class MyComments {
 }
 ```
 
-The `this.comments` array we defined above will hold the comments data loaded from the Supabase backend. Let's define a `Comment` type so that we can utilize Stencil's built in TypeScript support.
+The `this.comments` array we defined above will hold the comments data loaded from the Supabase backend. Let's define a `MyComment` type so that we can utilize Stencil's built in TypeScript support.
 
 ```ts
 type MyComment = {
@@ -214,7 +216,7 @@ Similar to how we added multiple render helper functions in the previous section
  
 When our component first loads, we need to also load the Supabase client and connect to it.
  
-Let's add the Supabase client as a dependency to our project with `npm i @supabase/supabase-js`. After installing, we can the references we need with the following import statement at the top of the component file.
+Let's add the Supabase client as a dependency to our project with `npm i @supabase/supabase-js`. After installing, we can get the references we need with the following import statement at the top of the component file.
  
 ```ts
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
@@ -306,6 +308,51 @@ private handleSubmit(ev: Event) {
 }
 ```
 
+## Adding Styles
+
+Lastly, let’s make the component a little nicer to look at by adding some styles. I have added the following CSS to `my-comments.css`, which is referenced in the `@Component` decorator.
+
+```css
+:host {
+  display: block;
+  font-family: sans-serif;
+}
+
+article[role="comment"] {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: .5rem;
+  box-shadow: black 5px 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form textarea {
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+  resize: vertical;
+  padding: .5rem;
+  box-sizing: border-box;
+}
+
+form input[type="submit"] {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: start;
+  max-width: min-content;
+  margin-top: .5rem;
+  padding: .5rem;
+}
+```
+
 ## Wrapping up
-There are a couple of things not covered in this tutorial that are necessary before the component is ready for public use: authentication, more styles, admin capabilities... If you enjoyed this tutorial, leave a comment below if you would like to see more!
-The full project is also available on [GitHub](https://github.com/willmartian/my-comments).
+There are a couple of things not covered in this tutorial that are necessary before the component is ready for public use, such as adding authentication and some content moderation capabilities. However, when we are ready and we [publish the component to npm](https://stenciljs.com/docs/publishing), we will have a powerful micro-frontend, wrapped in a Stencil web component, and ready to be dropped into any Jamstack website with zero additional configuration. 
+
+That is one of the natural synergies that web-standard Stencil web components have with the Jamstack. All that is required is a script tag and your components are ready to be consumed. Additionally, this component can also be built to Angular, React, or Vue components using Stencil’s built in [framework integrations.](https://stenciljs.com/docs/overview) Personally, I can’t wait to expand this starter and add it to [my Jamstack blog](https://willmartian.com) built with [11ty](https://www.11ty.dev/). If you enjoyed this tutorial, leave a comment below if you would like to see more!
