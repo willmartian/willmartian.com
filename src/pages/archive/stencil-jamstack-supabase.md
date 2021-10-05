@@ -9,11 +9,19 @@ tags:
   - jamstack
   - tutorial
 ---
-The JAMStack is a modern architecture for creating websites that focus on performance and developer experience. It can be used for anything from personal static blogs to large, enterprise, dynamic store fronts. The JAM in JAMStack stands for JavaScript, API’s, and markup. Worded differently, static markup is transformed by JavaScript and utilizes 3rd party API’s at build time and run time.
-Despite often being associated with static site generators, JAMstack sites do not need to do stay *static.* In situations where prerendered markup alone does not suffice, dynamic content can be progressively loaded on the client side. An online storefront might statically generate listings for all of the products in their catalog, and then update details like inventory or price after the page is first rendered.
-Web components are a great fit for this workflow, because they allow for adding zones of interactivity within otherwise static HTML. Let’s add user generated comments to a JAMstack site with a web component created with Stencil.
+The JAMstack is a modern architecture for creating websites that focus on performance and developer experience. It can be used for anything from personal static blogs to large, enterprise, dynamic storefronts. The JAM in JAMstack stands for JavaScript, API’s, and markup. Worded differently, static markup is transformed by JavaScript and utilizes third-party API’s at build time and run time. A comprehensive definition and history of JAMstack can be found [here.](https://jamstack.wtf/)
+
+Despite often being associated with static site generators, JAMstack sites do not need to do stay *static.* In situations where prerendered markup alone does not suffice, dynamic content can be progressively loaded on the client side. An online storefront might statically generate listings for all the products in their catalog, and then update details like inventory or price after the page is first rendered. Web components are a great fit for this workflow, because they allow for adding zones of interactivity within otherwise static HTML. 
+
+Let’s add user-generated comments to a JAMstack site with a web component created with Stencil that utilizes [Supabase](https://supabase.io/) to store dynamic data. Supabase is an open-source alternative to Firebase that provides an interface and API that makes database CRUD operations (creating, reading, updating and deleting) possible without writing backend code. I have been using it extensively in my personal projects, and I think combining it with Stencil's web components is a wonderful way to create [micro-frontends](https://micro-frontends.org/): dynamic, independent, contained widgets that can be dropped anywhere in a larger project (whether that is a SPA or a static HTML file).
+
+Here is a preview of the final component we will be creating:
+
+![Comments component preview](/files/commentsScreenshot.png "Comments component preview")
+
 ## Usage
-When I am building a component, I like to start out with writing an example of what the end usage might look like. For our comments component, I want it to have a really simple configuration: all that should be required to use the component is a unique ID, URL to our backend, and API token for Supabase.
+When I am building a component, I like to start out with writing an example of what the end usage might look like. For our comments component, I want it to have a really low-config API: all that should be required to use the component is a unique ID, URL to our backend, and access token for Supabase.
+
 ```html
 <my-comments
   id="..."
@@ -21,8 +29,10 @@ When I am building a component, I like to start out with writing an example of w
   supabase-key="..."
 ></my-comments>
 ```
+
 ## Stencil Implementation
 Let's scaffold out a Stencil component with  `npm run generate my-comments` in a new Stencil project. This will set us up with a boilerplate, to which we can add public properties with the `@Prop` decorator and internal state with the `@State` decorator. For a deeper introduction to props and state, check out the [Stencil documentation](https://stenciljs.com/docs/properties).
+
 ```tsx
 @Component({
   tag: 'my-comments',
@@ -30,34 +40,46 @@ Let's scaffold out a Stencil component with  `npm run generate my-comments` in a
   shadow: true,
 })
 export class MyComments {
-  private supabaseSession: Supabase;
   /**
    * We don't need a Prop for `id`, since it is a global HTML attribute.
    * Instead, we can grab it from the HTML element with the @Element decorator.
    */
   @Element() element;
+
   /**
    * Public URL to the Supabase backend.
    */
   @Prop() supabaseUrl: string;
+
   /**
    * Public access token to the Supabase backend.
    */
   @Prop() supabaseKey: string;
+
   /**
    * Comments associated with this block's `id`.
    */
   @State() comments: MyComment[] = [];
+
   /**
    * Value of the new comment text input.
    */
   @State() newCommentValue: string;
+
+  /**
+   * Supabase client to be initialized with `supabaseUrl` and `supabaseKey`.
+   * We will import this type when we install Supabase.
+   */
+  private supabase: SupabaseClient;
+
   render() {
     //...
   }
 }
 ```
+
 The `this.comments` array we defined above will hold the comments data loaded from the Supabase backend. Let's define a `Comment` type so that we can utilize Stencil's built in TypeScript support.
+
 ```ts
 type MyComment = {
   /*
@@ -84,14 +106,16 @@ type MyComment = {
   id: string;
 }
 ```
+
 ### Rendering a template
 Now we are ready to think about what we need to render to the user:
 - A list of current comments.
 - An input field for adding a new comment.
-- An authentication flow. *(Left as an exercise to the reader, but quite easy with Supabase!)*
-When building Stencil components with multiple moving parts, I find it helpful to separate out semantically-different templates into multiple render functions. 
+
+When building Stencil components with multiple moving parts, I find it helpful to separate out semantically-different templates into multiple render functions or functional components.
  
 The `renderComment` helper function will be used to render the markup for an individual comment. To make sure the comment is accessible, let's write it as an [HTML article element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article) with the [ARIA *comment* role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Comment_role).
+
 ```tsx
 private renderComment(comment: MyComment) {
   return (
@@ -107,7 +131,9 @@ private renderComment(comment: MyComment) {
   );
 }
 ```
+
 Now in our `render` function, we can call `renderComment` for each item in the `this.comments` state variable:
+
 ```tsx
 render() {
 return (
@@ -118,7 +144,9 @@ return (
 );
 }
 ```
+
 The last thing we need to add to our template is a way for users to add new comments. Let's add a small form with a submit button and a text input that updates the `newCommentValue`.
+
 ```tsx
 render() {
 return (
@@ -140,6 +168,7 @@ return (
 ```
 ### Handling Input
 In the form template above, we referenced two methods to be implemented that handle user input. In the `handleChange` method we want to store the current value of the input element into component state. The `handleSubmit` method will be implemented in the next section.
+
 ```ts
 private handleChange(ev: Event) {
   const target = ev.currentTarget as HTMLInputElement;
@@ -149,15 +178,18 @@ private handleSubmit(ev: Event) {
   // TODO
 }
 ```
+
 ## Setting up Supabase
 Now we have a shell set up to display our comments, and props and state set up to hold our data. Let's configure Supabase to hold our comment data and wire it up to the component’s lifecycle events.
-[Supabase](https://supabase.io/) is an open source alternative to Firebase that provides an easy to use interface and API that makes database CRUD operations (creating, reading, updating and deleting) very simple. I have been using it extensively in my personal projects, and I think combining it with Stencil's web components is a wonderful way to create [micro-frontends](https://micro-frontends.org/): dynamic, independent widgets that can be dropped anywhere in a larger project (whether that is a SPA or a static HTML file).
+
 After registering an account and creating a new project, configuring Supabase to work with our frontend only takes a couple of steps.
+
 ### Creating a Table to Store Comments
 In the Supabase sidebar, go to the "Tables" page in the sidebar and then select the `New` button. Let’s create a table with fields that match our `Comment` type above. Each field will be a column in the table, and each row will represent a comment.
 ![Supabase table editor](/files/supacommentsTable.png "Supabase table editor")
+
 ### Get the Supabase URL and Key
-In the Supabase sidebar, go to the "Settings" page in the sidebar and continue to the "API" sub page. There, Supabase exposes two things we need:
+In the Supabase sidebar, go to the "Settings" page in the sidebar and continue to the "API" sub-page. There, Supabase exposes two things we need:
 - The "anon" key is the client side api key that allows our frontend to connect to Supabase. This key is safe to share publicly.
 - The config URL is the public REST endpoint for our Supabase project.
 These values correspond to the `supabaseUrl` and `supabaseKey` props that were added to the component.
@@ -168,7 +200,9 @@ These values correspond to the `supabaseUrl` and `supabaseKey` props that were a
   supabase-key="[supabaseKey]"
 ></my-comments>
 ```
+
 **This tutorial does not cover setting up authentication.** Supabase has tutorials for doing so [here.](https://supabase.io/docs/guides/auth) Setting up proper authentication is necessary to prevent unrestricted CRUD access to the database.
+
 ## Connecting Supabase to Stencil
 We need the component to interact with Supabase in three ways:
 - Read comments from the database when first loaded
@@ -209,14 +243,18 @@ private async getComments() {
   this.comments = data;
 }
 ```
+
 We want to load the state when the component is first loaded, so we can call `getComments` in the `componentWillLoad` lifecycle function.
+
 ```ts
 componentWillLoad() {
   this.getComments();
 }
 ```
-### Real time updates from the database
-It would be nice if new comments were automatically shown in our comment list. Supabase makes that pretty easy too.
+
+### Real-time updates from the database
+It would be nice if new comments were automatically shown in our comment list. Supabase provides a way to do this as well.
+
 ```ts
 private async watchComments() {
   await this.supabase
@@ -229,15 +267,19 @@ private async watchComments() {
     .subscribe()
 }
 ```
+
 This can also be added to the `componentWillLoad` lifecycle function.
+
 ```ts
 componentWillLoad() {
   this.getComments();
   this.watchComments();
 }
 ```
+
 ### Add new comment to the database
 The last piece of functionality we need is the ability to add new comments.
+
 ```ts
 private async addComment() {
   const { data, error } = await this.supabase
@@ -253,7 +295,9 @@ private async addComment() {
   return data;
 }
 ```
+
 Now, we need to call `addComment` whenever the form in our component's template is submitted. Let's add it to the `handleSubmit` function we created earlier.
+
 ```ts
 private handleSubmit(ev: Event) {
   // Prevent the default event behavior to keep the page from refreshing.
@@ -261,6 +305,7 @@ private handleSubmit(ev: Event) {
   this.addComment();
 }
 ```
+
 ## Wrapping up
 There are a couple of things not covered in this tutorial that are necessary before the component is ready for public use: authentication, more styles, admin capabilities... If you enjoyed this tutorial, leave a comment below if you would like to see more!
 The full project is also available on [GitHub](https://github.com/willmartian/my-comments).
