@@ -1,6 +1,6 @@
 ---
 title: "Dynamic JAMStack with Stencil and Supabase"
-blurb: "Let's build a widget for user comments to our 11ty blog!"
+blurb: "Let's add a comments widget to our \"static\" site!"
 date: 2021-09-29
 usePrism: true
 tags:
@@ -9,6 +9,9 @@ tags:
   - jamstack
   - tutorial
 ---
+
+![Stencil and supabase](/files/stencil-supabase-feature-image.png "Stencil and Supabase logos")
+
 The Jamstack is a modern architecture for creating websites that focus on performance and developer experience. It can be used for anything from personal static blogs to large, enterprise, dynamic storefronts. The *Jam* in Jamstack stands for JavaScript, API’s, and markup. Worded differently, static markup is transformed by JavaScript and utilizes third-party API’s at build time and run time. A comprehensive definition and history of Jamstack can be found [here.](https://jamstack.wtf/)
 
 Despite often being associated with static site generators, Jamstack sites do not need to do stay *static.* In situations where prerendered markup alone does not suffice, dynamic content can be progressively loaded on the client side. An online storefront might statically generate listings for all the products in their catalog, and then update details like inventory or price after the page is first rendered. Web components are a great fit for this workflow, because they allow for adding zones of interactivity within otherwise static HTML.

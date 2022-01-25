@@ -4,13 +4,21 @@
 ---
 
 <main>
-  <h1 class="title"><span>w://</span> marti<span>a</span>n</h1>
-  <p>I am a researcher, software developer, and open source advocate.</p>
-
+  <h1 class="title"><span>w://</span> martian <span>👽🛸🐄</span></h1>
+  <p class="lead">Hi, I'm Will. I believe <b>information should be free.</b> I pursue that goal through working on open source, open education, and open science.</p>
+  <nav>
+    <a href="/about">About Me</a>
+    <a href="/archive">Post Archive</a>
+  </nav>
+  
   <section id="latest">
-    <h2>Latest Post</h2>
+    <h2>Latest Post 🚀</h2>
     {% postCard collections.posts | last %}
-    <a href="/archive">View Archive</a>
+  </section>
+
+  <section id="links">
+    <h2>Pinned 📌</h2>
+    <blockquote class="twitter-tweet" data-dnt="true"><p lang="en" dir="ltr">Writing a sci fi novel where everyone lives, unbeknownst to them, within their own Docker container</p>&mdash; Will 🛸 (@will_martian) <a href="https://twitter.com/will_martian/status/1485678671914573831?ref_src=twsrc%5Etfw">January 24, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
   </section>
 
   {# <section>
