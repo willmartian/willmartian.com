@@ -4,7 +4,7 @@
 
 ## Education 🧑‍🏫
 
-I am finishing up a MLIS at Florida State University. I think libraries are awesome, and that the historical instituion of a library is a great model for an open internet. *PhD announcement soon?* 👀
+I am finishing up a MLIS at Florida State University. I think libraries are awesome, and that they are a great model for an open internet. *PhD announcement soon?* 👀
 
 I studied psychology and computer science at Georgia Tech. Whisk the two until you get stiff peaks, call that human-computer interaction. Sang in the Glee Club, made games with [VGDev](https://vgdev.gtorg.gatech.edu/), changed majors 30 times, worked on computer science education research with the [Expressive Machinery Lab.](https://expressivemachinery.gatech.edu/) 
 
@@ -22,6 +22,6 @@ I am a socialist. I am anti-capitalist, anti-racist, anti-fascist. Workers starv
 
 Places I have lived: Norfolk VA, Atlanta GA, Hoschton GA (hometown). 
 
-I was recently diagnosed as ADHD--so still working on that. Take care of your mental health!
+I was recently diagnosed with ADHD--so still working on that. Take care of your mental health!
 
 Thanks for visiting my little site. It was built with a cool tool, [Eleventy.](https://www.11ty.dev/) (There are a billion ways to make a website, with or without coding. Try it!)
