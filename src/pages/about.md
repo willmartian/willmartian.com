@@ -4,7 +4,7 @@
 
 ## Education 🧑‍🏫
 
-I am finishing up a MLIS at Florida State University. I think libraries are awesome, and that they are a great model for an open internet. *PhD announcement soon?* 👀
+I am finishing up a MLIS at Florida State University. I think libraries are awesome, and that they are a great model for an open internet.
 
 I studied psychology and computer science at Georgia Tech. Whisk the two until you get stiff peaks, call that human-computer interaction. Sang in the Glee Club, made games with [VGDev](https://vgdev.gtorg.gatech.edu/), changed majors 30 times, worked on computer science education research with the [Expressive Machinery Lab.](https://expressivemachinery.gatech.edu/) 
 
