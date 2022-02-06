@@ -15,7 +15,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("packageVersion", () => `v${packageVersion}`);
   
   eleventyConfig.addShortcode("postCard", post => {
-    return `<a href="${post.url}" class="card-link">
+    return `<a href="${post.url}" class="card-link" data-tags=${post.data.tags}>
       <article class="card">
         <header>
           <h3>${post.data.title}</h3>

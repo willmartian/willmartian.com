@@ -1,21 +1,20 @@
 {
   "name": "willmartian.com",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Will Martin's personal website.",
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": {
+    "name": "Will Martin",
+    "url": "https://willmartian.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
     "@11ty/eleventy-plugin-inclusive-language": "^1.0.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.1"
-  },
-  "dependencies": {
-    "@willmartian/web-phone": "^0.0.1"
   }
 }
