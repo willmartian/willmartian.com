@@ -4,5 +4,7 @@ module.exports = {
   siteDescription:
     "Will's personal website.",
   authorName: "Will Martin",
-  repo: "https://github.com"
+  repo: "https://github.com",
+  Twitter: "@will_martian",
+  GitHub: "willmartian"
 };
