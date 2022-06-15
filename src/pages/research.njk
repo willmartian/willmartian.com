@@ -1,0 +1,10 @@
+---
+  title: "research 🔬"
+---
+
+{% for pub in publications %}
+  <details class="pub">
+    <summary>{{ pub.citation | safe }}</summary>
+    <p>{{ pub.abstract }}</p>
+  </details>
+{% endfor %}

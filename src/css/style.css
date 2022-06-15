@@ -203,10 +203,16 @@ form#tag-list {
   margin-top: 1rem;
 }
 
-#ballpit {
-  width: 250px;
-  max-width: 100%;
-  border-radius: 1rem;
+details.pub {
+  margin-top: 2em;
+}
+
+details.pub > summary {
+  margin-bottom: 1em;
+}
+
+details.pub > p {
+  margin-left: 1em;
 }
 
 @media screen and (prefers-reduced-motion: no-preference) {
