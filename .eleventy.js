@@ -1,5 +1,7 @@
 const inclusiveLangPlugin = require("@11ty/eleventy-plugin-inclusive-language");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./src/sass/");
@@ -71,6 +73,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(inclusiveLangPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.setDataDeepMerge(true);
 
