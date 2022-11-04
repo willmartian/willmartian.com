@@ -2,21 +2,21 @@
   title: About Me
 ---
 
+## Work ☕
+
+I am currently a front end engineer at [Bitwarden](https://bitwarden.com), the open source password manager.
+
+I worked for Ionic, where I was a core contributor to the [Ionic Framework](https://github.com/ionic-team/ionic-framework). 
+
+I worked for Florida State University and Old Dominion University, developing and designing digital things like OER and research tools.
+
+I worked for Cartoon Network and Adult Swim, making sure their games were bug free... [well I tried.](https://www.polygon.com/2017/10/31/16581842/steven-universe-save-the-light-review) 
+
 ## Education 🧑‍🏫
 
 I recently finished a MLIS at Florida State University. I think libraries are awesome, and that they are the perfect model for an open internet.
 
 I studied psychology and computer science at Georgia Tech. Whisk the two until you get stiff peaks, call that human-computer interaction. Sang in the Glee Club, made games with [VGDev](https://vgdev.gtorg.gatech.edu/), changed majors 30 times, worked on computer science education research with the [Expressive Machinery Lab.](https://expressivemachinery.gatech.edu/) (I have so many thoughts and feelings about GT, feel free to reach out if you are a prospective student!)
-
-## Work ☕
-
-I like working on things that further openess.
-
-I have worked for Ionic, where I was a core contributor to the [Ionic Framework](https://github.com/ionic-team/ionic-framework). 
-
-I have worked for groups at Florida State University and Old Dominion University, developing and designing digital things like OER and research tools.
-
-I have worked for Cartoon Network and Adult Swim, making sure their games were bug free... [well I tried.](https://www.polygon.com/2017/10/31/16581842/steven-universe-save-the-light-review) 
 
 ## Random 🤠
 

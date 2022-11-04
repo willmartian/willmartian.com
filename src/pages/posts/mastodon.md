@@ -1,5 +1,5 @@
 ---
-title: "A simple and shareable intro to Mastodon."
+title: "A simple and shareable intro to Mastodon"
 blurb: "What if social media worked more like email?"
 date: 2022-11-05
 tags:
