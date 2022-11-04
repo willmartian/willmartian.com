@@ -12,7 +12,7 @@ Imagine if Gmail were the only email provider anyone used, and that you could on
 
 Thankfully, email doesn’t actually work like this. One can create an email account with Hotmail and send and receive mail to others on Gmail, Protonmail, etc. You can even set up your own email server and host it yourself, if you are into that.
 
-**[Mastodon](https://joinmastodon.org) is a social network that works like email.** Instead of everyone using one or two social network providers and being locked in (like they are with Twitter and Facebook), they can create a Mastodon account wherever they want to without losing the ability to connect with their friends on other sites. 
+**[Mastodon](https://joinmastodon.org) is social network software that works like email.** Instead of everyone using one or two social network providers and being locked in (like they are with Twitter and Facebook), they can create a Mastodon account wherever they want to without losing the ability to connect with their friends on other sites. 
 
 You can browse some different Mastodon sites (also known as *instances*) [here.](https://joinmastodon.org/servers) There are general purpose sites (such as [mastodon.social](https://mastodon.social) and [mas.to](https://mas.to)) and sites that cater to specific topics or geographic areas. Personally, I am currently on [fosstodon.org](https://fosstodon.org), an instance focused on computers and software. 
 
