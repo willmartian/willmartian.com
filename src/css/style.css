@@ -226,6 +226,7 @@ details.pub > p {
 
 fedi-chat {
   font-family: monospace;
+  font-size: 0.75rem;
 }
 
 fedi-chat::part(comment) {
