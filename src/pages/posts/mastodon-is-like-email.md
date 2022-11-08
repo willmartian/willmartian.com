@@ -18,3 +18,5 @@ Thankfully, email doesn’t actually work like this. One can create an email acc
 You can browse some different Mastodon sites (also known as *instances*) [here.](https://joinmastodon.org/servers) There are general purpose sites (such as [mastodon.social](https://mastodon.social) and [mas.to](https://mas.to)) and sites that cater to specific topics or geographic areas. Personally, I am currently on [fosstodon.org](https://fosstodon.org), an instance focused on computers and software. 
 
 Found this helpful? I will be writing a blog post on Mastodon and similar topics for each week of November. Create an account on any Mastodon site you like and follow me at [@willmartian@fosstodon.org](https://fosstodon.org/@willmartian) for updates. (See, the usernames even *look* like email addresses!)
+
+<small><i>P.S.</i> I am <i>experimenting</i> with adding Mastodon comments to my blog.</small>
