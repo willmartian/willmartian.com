@@ -2,6 +2,7 @@
 title: "Mastodon is like email"
 blurb: "A jargon-free introduction"
 date: 2022-11-04
+useComments: "https://fosstodon.org/@willmartian/109285848751638736"
 tags:
   - articles
   - Mastodon

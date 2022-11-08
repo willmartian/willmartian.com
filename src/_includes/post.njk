@@ -4,3 +4,9 @@ layout: page.njk
 <section class="note card light"><b>Published:</b> <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString() }}</time> by <a href="{{ '/about' | url}}">Will</a> 👽</section>
 
 {{ content | safe }}
+
+{% if useComments %}
+    <div class="fedi-chat-container">
+        <fedi-chat src="{{ useComments }}"><fedi-chat>
+    </div>
+{% endif %}
