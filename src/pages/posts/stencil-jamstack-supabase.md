@@ -3,6 +3,7 @@ title: "Dynamic JAMStack with Stencil and Supabase"
 blurb: "Let's add a comments widget to our \"static\" site!"
 date: 2021-09-29
 usePrism: true
+eleventyExcludeFromCollections: true
 tags:
   - articles
   - Stencil

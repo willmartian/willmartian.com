@@ -1,12 +1,13 @@
 ---
 layout: page.njk
 ---
-<section class="note card light"><b>Published:</b> <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString() }}</time> by <a href="{{ '/about' | url}}">Will</a> 👽</section>
+<section><b>Published:</b> <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString() }}</time></section>
 
 {{ content | safe }}
 
-{% if useComments %}
-    <div class="fedi-chat-container">
-        <fedi-chat src="{{ useComments }}"><fedi-chat>
+{% if comments %}
+    <script type="module" src="https://cdn.jsdelivr.net/npm/fedichat@0.0.6/dist/fedichat.js"></script>
+    <div class="comments">
+        <fedi-chat src="{{ comments }}"><fedi-chat>
     </div>
 {% endif %}
