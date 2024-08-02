@@ -75,11 +75,3 @@ a, a:visited {
 .comments {
   margin-top: 3em;
 }
-
-fedi-chat::part(comment) {
-  max-width: 65ch;
-  font-size: .85rem;
-  background-color: #e0ecf1;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-}
