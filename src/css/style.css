@@ -27,12 +27,6 @@ body {
   navigation: auto;
 }
 
-@utility auto-grid {
-  --auto-grid-min-size: 20rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
-}
-
 h1 {
   margin-top: 0;
   font-size: 2rem;
@@ -41,8 +35,7 @@ h1 {
 }
 
 .title {
-  display: inline;
-  margin-bottom: 0;
+  @apply mb-4 block;
 }
 
 h2 {
@@ -88,10 +81,6 @@ figure {
   figcaption {
     @apply card float-end -mt-6 mx-6 z-10 relative;
   }
-}
-
-article {
-  margin-top: 3rem;
 }
 
 p {
