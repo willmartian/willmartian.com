@@ -1,8 +1,9 @@
 ---
-title: "Passwords, Password Managers, and Passkeys (oh my!)"
+title: "draft - Passwords, Password Managers, and Passkeys (oh my!)"
 # blurb: "A jargon-free introduction"
 date: 2025-03-20
 # comments: "https://fosstodon.org/@willmartian/109285848751638736"
+eleventyExcludeFromCollections: true
 ---
 
 Passwords are an old (*open sesame*) and flawed technology. There are just too many scenarios where user error can sneak in:

@@ -5,30 +5,39 @@
   font-weight: 400;
   font-style: normal;
 
-  --color-background: white;
-  --color-primary: #1a508a;
-  --color-secondary: #008275;
+  --color-secondary: var(--color-emerald-700);
   --color-text: black;
-  --color-muted: #e0ecf1;
 }
 
 html,
 body {
   color: var(--color-text);
-  background-color: var(--color-background);
-  font-size: 24px;
+  @apply bg-amber-50 text-[20px] md:text-[24px];
   margin: 0;
   padding: 0;
 }
 
+
+
 body {
   padding: 2rem;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+@utility auto-grid {
+  --auto-grid-min-size: 20rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
 }
 
 h1 {
   margin-top: 0;
   font-size: 2rem;
   color: var(--color-text);
+  font-weight: 600;
 }
 
 .title {
@@ -41,6 +50,14 @@ h2 {
   color: var(--color-secondary);
 }
 
+ul {
+  @apply list-disc;
+}
+
+ol {
+  @apply list-decimal;
+}
+
 ul,
 ol {
   max-width: 80ch;
@@ -48,24 +65,29 @@ ol {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
+  li {
+    margin: 0;
+  }
 }
 
-li {
-  margin: 0;
-}
-
-.post-list {
-  margin-top: 2rem;
-}
-
-.post-meta {
-  font-size: 0.85rem;
-  border: 2px solid black;
-  max-width: fit-content;
-  border-radius: 1rem;
-  padding: 1rem;
+@utility card {
   box-shadow: 4px 4px black;
-  background-color: #0082753d;
+  @apply rounded-md border-solid border-2 border-black text-sm bg-white;
+
+  &:not(img) {
+    @apply max-w-fit p-4;
+  }
+}
+
+figure {
+  img {
+    @apply card;
+  }
+  
+  figcaption {
+    @apply card float-end -mt-6 mx-6 z-10 relative;
+  }
 }
 
 article {
@@ -75,14 +97,12 @@ article {
 p {
   max-width: 65ch;
   line-height: 1.75rem;
-  margin-bottom: 1.25rem;
-  margin-top: 2rem;
+  @apply mb-6;
 }
 
 a,
 a:visited {
-  color: var(--color-secondary);
-  /* text-decoration-style: un; */
+  color: var(--color-emerald-700);
   text-decoration: none;
 
   &:hover {
@@ -92,16 +112,16 @@ a:visited {
   }
 }
 
-.comments {
-  margin-top: 3em;
-  font-size: 0.85rem;
-}
-
 ap-comments {
   --color-muted: black;
   font-family: "Inika", serif;
   font-weight: 400;
   font-style: normal;
+}
+
+sl-icon-button {
+  color: black;
+  --sl-color-primary-600: var(--color-emerald-600);
 }
 
 sl-icon-button::part(base) {
@@ -111,26 +131,4 @@ sl-icon-button::part(base) {
 hr {
   max-width: 65ch;
   margin-left: 0;
-}
-
-.top-nav {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.25rem;
-}
-
-.about-page {
-  display: flex;
-  max-width: fit-content;
-
-  & > div {
-    min-width: 50%;
-    flex: 1;
-  }
-
-  img {
-    max-width: 100%;
-    object-fit: contain;
-  }
 }
