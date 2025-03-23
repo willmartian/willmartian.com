@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   url: process.env.URL || "http://localhost:8080",
   siteName: "WillMartian.com",
   siteDescription:

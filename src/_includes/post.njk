@@ -1,7 +1,11 @@
 ---
 layout: page.njk
 ---
-<section><b>Published:</b> <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString() }}</time></section>
+<section class="post-meta">
+    <b>Published:</b> <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString() }}</time>
+    <br />
+    Takes about {{ content | readingTime }} to read
+</section>
 
 {{ content | safe }}
 

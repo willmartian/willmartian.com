@@ -3,6 +3,7 @@ node_modules
 
 # build artefacts
 public
+_site
 
 # secrets and errors
 .env

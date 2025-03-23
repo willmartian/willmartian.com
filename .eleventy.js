@@ -1,9 +1,14 @@
-const inclusiveLangPlugin = require("@11ty/eleventy-plugin-inclusive-language");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
+// @ts-check
 
+import inclusiveLangPlugin from "@11ty/eleventy-plugin-inclusive-language";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import pluginRss from "@11ty/eleventy-plugin-rss";
+import readingTime from 'eleventy-plugin-reading-time';
+import  EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
+import tailwindcss from "@tailwindcss/vite";
 
-module.exports = function (eleventyConfig) {
+/** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
+export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./src/sass/");
 
   eleventyConfig.addPassthroughCopy("./src/css");
@@ -13,12 +18,21 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/files");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
 
+  eleventyConfig.addPassthroughCopy({
+    ['node_modules/@shoelace-style/shoelace/dist/']: "assets/shoelace/dist",
+  });
+
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
-  eleventyConfig.addShortcode("packageVersion", () => `v${packageVersion}`);
 
   eleventyConfig.addPlugin(inclusiveLangPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(EleventyVitePlugin, {
+    viteOptions: {
+      plugins: [tailwindcss()]
+    }
+  });
+  eleventyConfig.addPlugin(readingTime);
 
   eleventyConfig.setDataDeepMerge(true);
 
@@ -27,7 +41,6 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: "njk",
     dir: {
       input: "src",
-      output: "public",
     },
   };
 };

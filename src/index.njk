@@ -5,11 +5,17 @@
 
 <main>
   <h1 class="title"><span>w://</span> martian</h1>
-  <p class="lead">Welcome to my lil website.</p>
+  <div class="top-nav">
+      <a href="/about">who?</a>
+      <sl-icon-button name="mastodon" label="Mastodon" rel="me" href="https://fosstodon.org/@willmartian" target="_blank"></sl-icon-button>
+      <sl-icon-button name="rss" label="RSS" href="/feed.xml" target="_blank"></sl-icon-button>
+      <sl-icon-button name="github" label="GitHub" href="https://github.com/willmartian/" target="_blank"></sl-icon-button>
+  </div>
+  <p>Welcome to my lil website.</p>
 
   <nav>
-    <a href="/about">About</a> | <a rel="me" href="https://fosstodon.org/@willmartian">Mastodon</a> | <a href="/feed.xml">RSS</a> | <a href="https://github.com/willmartian/">GitHub</a>
     
+
     <ol reversed class="post-list">
       {% for post in collections.posts | reverse %}
       <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
