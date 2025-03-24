@@ -2,7 +2,7 @@
 title: "Passwords & Password Managers & Passkeys, oh my!"
 blurb: "Passwords are a flawed technology. What are our options?"
 date: 2025-03-24
-# comments: "https://fosstodon.org/@willmartian/109285848751638736"
+comments: "https://fosstodon.org/@willmartian/114217181108196105"
 ---
 
 **Passwords** are a flawed technology. There are just too many scenarios where user error can sneak in:
