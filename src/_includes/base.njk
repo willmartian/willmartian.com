@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
   <script data-shoelace="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/" type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/icon-button/icon-button.js"></script>
   
-  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+  <link rel="stylesheet" href="./css/style.css">
 
   {% if usePrism %}
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
@@ -27,7 +27,7 @@
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ blurb or desc or title }}">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://willmartian.com/files/martianLogo.png"/>
+  <meta property="og:image" content="./assets/martianLogo.png"/>
   <meta property="og:image:width" content="1140" />
   <meta property="og:image:height" content="544" />
   <!-- Twitter -->
@@ -35,7 +35,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="{{ twitter }}">
   <meta name="twitter:description" content="{{ blurb or desc or title }}">
-  <meta name="twitter:image" content="https://willmartian.com/files/martianLogo.png">
+  <meta name="twitter:image" content="./assets/martianLogo.png">
   <meta name="twitter:creator" content="{{ twitter }}">
 </head>
 <body>
