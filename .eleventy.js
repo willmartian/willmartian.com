@@ -12,8 +12,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./src/sass/");
 
   eleventyConfig.addPassthroughCopy("./src/css");
-  eleventyConfig.addPassthroughCopy("./src/public");
+  eleventyConfig.addPassthroughCopy("./src/fonts");
+  eleventyConfig.addPassthroughCopy("./src/img");
+  eleventyConfig.addPassthroughCopy("./src/favicon.png");
   eleventyConfig.addPassthroughCopy("./src/files");
+  eleventyConfig.addPassthroughCopy("./src/robots.txt");
 
   eleventyConfig.addPassthroughCopy({
     ['node_modules/@shoelace-style/shoelace/dist/']: "assets/shoelace/dist",

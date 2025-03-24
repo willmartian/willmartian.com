@@ -1,7 +1,8 @@
 # dependencies installed by npm
 node_modules
 
-# build artifacts
+# build artefacts
+public
 _site
 
 # secrets and errors
