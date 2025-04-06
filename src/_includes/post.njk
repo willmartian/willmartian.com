@@ -9,10 +9,10 @@ layout: page.njk
 
 {{ content | safe }}
 
-{% if comments %}
+{# {% if comments %}
     <script type="module" src="https://cdn.jsdelivr.net/npm/ap-comments@0.1.1/dist/ap-comments.js"></script>
     <div class="card -mx-4 mt-1 text-sm bg-white">
         <ap-comments src="{{ comments }}"></ap-comments>
         <div class="text-sm -mt-2"><a target="_blank" href="{{ comments }}">Join the conversation on Mastodon.</a></div>
     </div>
-{% endif %}
+{% endif %} #}
