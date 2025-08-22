@@ -1,7 +1,7 @@
 ---
 title: "Product shouldn't decide what to build"
 date: 2025-08-22
-# comments: "https://fosstodon.org/@willmartian/109285848751638736"
+comments: "https://fosstodon.org/@willmartian/115073408360995471"
 ---
 
 ...unilateraly. Instead, teams should negotiate.
