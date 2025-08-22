@@ -11,7 +11,7 @@
 html,
 body {
   color: var(--color-text);
-  @apply bg-amber-50 text-[20px] md:text-[24px];
+  @apply bg-white text-[20px] md:text-[24px];
   margin: 0;
   padding: 0;
 }
@@ -65,7 +65,7 @@ ol {
 
 @utility card {
   box-shadow: 4px 4px black;
-  @apply rounded-md border-solid border-2 border-black text-sm bg-white;
+  @apply bg-gray-100 rounded-md border-solid border-2 border-black text-sm;
 
   &:not(img) {
     @apply max-w-fit p-4;
@@ -119,6 +119,7 @@ sl-icon-button::part(base) {
 hr {
   max-width: 65ch;
   margin-left: 0;
+  border: 2px dashed black;
   @apply my-10;
 }
 
