@@ -1,18 +1,44 @@
 ---
 layout: page.njk
 ---
-<section class="card mb-10">
-    <b>Published:</b> <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString() }}</time>
-    <br />
-    Takes about {{ content | readingTime }} to read
-</section>
+<div class="text-sm text-gray-600 mb-12">
+    <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</time>
+    <span class="mx-2">·</span>
+    <span>{{ content | readingTime }}</span>
+</div>
 
 {{ content | safe }}
 
 {% if comments %}
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ap-comments@0.1.1/dist/ap-comments.js"></script>
-    <div class="card -mx-4 mt-1 text-sm">
+    <div class="mt-16">
+        <h3 class="text-lg font-semibold mb-4">Comments</h3>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/ap-comments@0.1.1/dist/ap-comments.js"></script>
         <ap-comments src="{{ comments }}"></ap-comments>
-        <div class="text-sm -mt-2"><a target="_blank" href="{{ comments }}">Join the conversation on Mastodon.</a></div>
+        <div class="text-sm mt-4 text-gray-600"><a target="_blank" href="{{ comments }}">Join the conversation on Mastodon →</a></div>
     </div>
 {% endif %}
+
+{# Post navigation #}
+<nav class="mt-16">
+  <div class="flex justify-between items-start gap-8">
+    <div class="flex-1">
+      {%- set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+      {% if previousPost %}
+        <a href="{{ previousPost.url }}" class="block group">
+          <div class="text-sm text-gray-600 mb-1">← Previous</div>
+          <div class="font-semibold group-hover:text-emerald-600">{{ previousPost.data.title }}</div>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="flex-1 text-right">
+      {%- set nextPost = collections.posts | getNextCollectionItem(page) %}
+      {% if nextPost %}
+        <a href="{{ nextPost.url }}" class="block group">
+          <div class="text-sm text-gray-600 mb-1">Next →</div>
+          <div class="font-semibold group-hover:text-emerald-600">{{ nextPost.data.title }}</div>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

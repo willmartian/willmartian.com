@@ -4,23 +4,31 @@
 ---
 
 <main>
-  <h1 class="title"><span>w://</span> martian</h1>
+  <h1 class="mb-4 block"><span>w://</span> martian</h1>
 
-  <div class="card p-4 max-w-fit">
-    <p class="!mb-2">Welcome to my site / blog / microblog / wiki / e-garden / porfolio / abandonware / thing where I ramble about software and society.</p>
+  <div class="max-w-2xl mb-12">
+    <p class="!mb-4 text-base">
+      I'm a software engineer and designer who thinks about UI, open source, and how we build for the web.
+    </p>
 
-    <div class="flex items-center gap-3">
-      <a class="ml-auto" href="/about/">who??</a>
-      <sl-icon-button name="mastodon" label="Mastodon" rel="me" href="https://fosstodon.org/@willmartian" target="_blank"></sl-icon-button>
-      <sl-icon-button name="rss" label="RSS" href="/feed.xml" target="_blank"></sl-icon-button>
-      <sl-icon-button name="github" label="GitHub" href="https://github.com/willmartian/" target="_blank"></sl-icon-button>
-    </div>
+    <p>
+      <a class="font-semibold" href="/about/">more about me →</a>
+    </p>
   </div>
-  <nav class="mt-10">
-    <ol reversed>
+
+  <nav class="mt-16">
+    <div class="text-sm text-gray-500 font-mono mb-4">$ ls posts/</div>
+    <div class="flex flex-col gap-3">
       {% for post in collections.posts | reverse %}
-      <li class="list-decimal"><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+        <article class="border-l-2 border-gray-300 pl-4 hover:border-emerald-500 transition-colors">
+          <h3 class="!mt-0 !mb-1 text-lg">
+            <a href="{{ post.url }}" class="text-black hover:text-emerald-600">{{ post.data.title }}</a>
+          </h3>
+          <div class="text-sm text-gray-600">
+            {{ post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }} · {{ post.templateContent | readingTime }}
+          </div>
+        </article>
       {% endfor %}
-    </ol>
+    </div>
   </nav>
 </main>

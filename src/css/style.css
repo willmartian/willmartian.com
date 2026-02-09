@@ -1,104 +1,104 @@
 @import 'tailwindcss';
 
-:root {
-  font-family: "Inika", serif;
-  font-weight: 400;
-  font-style: normal;
-
-  --color-text: black;
-}
-
-html,
-body {
-  color: var(--color-text);
-  @apply bg-white text-[20px] md:text-[24px];
-  margin: 0;
-  padding: 0;
-}
-
-
-
-body {
-  padding: 2rem;
-}
-
+/* View Transitions API */
 @view-transition {
   navigation: auto;
 }
 
-h1 {
-  margin-top: 0;
-  font-size: 2rem;
-  color: var(--color-text);
-  font-weight: 600;
-}
+/* Base element styles */
+@layer base {
+  :root {
+    font-family: "Inika", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 
-.title {
-  @apply mb-4 block;
-}
+  html,
+  body {
+    @apply m-0 p-0 bg-white text-black text-[20px] md:text-[24px];
+  }
 
-h2 {
-  font-size: 1rem;
-}
+  body {
+    @apply p-8;
+    background-image:
+      linear-gradient(to right, white 0%, white 20%, transparent 60%),
+      repeating-linear-gradient(0deg, #f5f5f5 0px, #f5f5f5 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(90deg, #f5f5f5 0px, #f5f5f5 1px, transparent 1px, transparent 20px);
+    background-size: 100% 100%, 20px 20px, 20px 20px;
+  }
 
-ul {
-  @apply list-disc;
-}
+  h1 {
+    @apply mt-0 text-4xl font-semibold text-black tracking-tight;
+  }
 
-ol {
-  @apply list-decimal;
-}
+  h2 {
+    @apply text-2xl font-semibold text-black mt-8 mb-4 tracking-tight;
+  }
 
-ul,
-ol {
-  max-width: 80ch;
-  padding-left: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  @apply mb-6;
+  h3 {
+    @apply text-xl font-semibold text-black mt-6 mb-3;
+  }
 
-  li {
-    margin: 0;
+  h4 {
+    @apply text-lg font-semibold text-black mt-4 mb-2;
+  }
+
+  ul {
+    @apply list-disc max-w-[65ch] pl-4 flex flex-col gap-1 mb-6;
+  }
+
+  ol {
+    @apply list-decimal max-w-[65ch] pl-4 flex flex-col gap-1 mb-6;
+  }
+
+  ul li,
+  ol li {
+    @apply m-0;
+  }
+
+  p {
+    @apply max-w-[65ch] leading-relaxed mb-6;
+  }
+
+  a,
+  a:visited {
+    @apply text-emerald-700 no-underline transition-all duration-150;
+  }
+
+  a:hover {
+    @apply underline decoration-[3px] underline-offset-[3px] text-emerald-600;
+  }
+
+  a:focus-visible {
+    @apply outline outline-4 outline-emerald-500 outline-offset-2 rounded-sm;
+  }
+
+  hr {
+    @apply border-t-2 border-dashed border-gray-300 my-8;
+  }
+
+  code {
+    @apply text-sm bg-gray-100 text-black rounded-sm px-1.5 py-0.5 border border-black;
+  }
+
+  pre code {
+    @apply block p-4 overflow-x-auto text-sm;
+    box-shadow: 3px 3px black;
   }
 }
 
-@utility card {
+/* Figure/image caption styles */
+figure img {
   box-shadow: 4px 4px black;
-  @apply bg-gray-100 rounded-md border-solid border-2 border-black text-sm;
-
-  &:not(img) {
-    @apply max-w-fit p-4;
-  }
+  @apply rounded-md border-solid border-2 border-black;
 }
 
-figure {
-  img {
-    @apply card;
-  }
-  
-  figcaption {
-    @apply card float-end -mt-6 mx-6 z-10 relative;
-  }
+figure figcaption {
+  box-shadow: 3px 3px black;
+  @apply bg-white rounded border-2 border-black text-sm max-w-fit p-3 float-end -mt-6 mx-6 z-10 relative;
 }
 
-p {
-  max-width: 65ch;
-  line-height: 1.75rem;
-  @apply mb-6;
-}
-
-a, a:visited {
-  color: var(--color-sky-700);
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 3px;
-  }
-}
-
+/* Web component styles (cannot be styled via Tailwind classes) */
 ap-comments {
   --color-muted: black;
   font-family: "Inika", serif;
@@ -109,20 +109,42 @@ ap-comments {
 
 sl-icon-button {
   color: black;
-  --sl-color-primary-600: var(--color-sky-600);
+  --sl-color-primary-600: theme('colors.emerald.600');
+  transition: transform 150ms ease;
+}
+
+sl-icon-button:hover {
+  transform: scale(1.1);
+  color: theme('colors.emerald.600');
 }
 
 sl-icon-button::part(base) {
   padding: 0;
 }
 
-hr {
-  max-width: 65ch;
-  margin-left: 0;
-  border: 2px dashed black;
-  @apply my-10;
+sl-icon-button::part(base):focus-visible {
+  outline: 3px solid black;
+  outline-offset: 2px;
 }
 
-code {
-  @apply text-xs bg-slate-700 text-white rounded-sm p-1;
+/* Navigation styles */
+.nav-link {
+  @apply transition-all duration-150 text-black;
+}
+
+.nav-link:hover {
+  @apply text-emerald-600;
+}
+
+.nav-link.active {
+  @apply text-emerald-600 underline decoration-2 underline-offset-4;
+}
+
+/* Accent color utilities */
+.tag {
+  @apply inline-block px-2 py-0.5 text-xs rounded border border-emerald-600 text-emerald-700 bg-emerald-50 font-mono;
+}
+
+.featured-border {
+  @apply border-l-4 border-emerald-500 pl-4;
 }
