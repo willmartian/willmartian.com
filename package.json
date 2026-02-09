@@ -13,6 +13,9 @@
     "url": "https://willmartian.com"
   },
   "license": "ISC",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-inclusive-language": "^1.0.2",
