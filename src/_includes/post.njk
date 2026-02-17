@@ -3,8 +3,7 @@ layout: page.njk
 ---
 <div class="text-sm text-gray-600 mb-12">
     <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</time>
-    <span class="mx-2">·</span>
-    <span>{{ content | readingTime }}</span>
+
 </div>
 
 {{ content | safe }}

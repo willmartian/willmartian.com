@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@source "../**/*.njk";
+@source "../**/*.md";
 
 /* View Transitions API */
 @view-transition {
@@ -105,26 +107,6 @@ ap-comments {
   font-weight: 400;
   font-style: normal;
   margin-bottom: 0;
-}
-
-sl-icon-button {
-  color: black;
-  --sl-color-primary-600: theme('colors.emerald.600');
-  transition: transform 150ms ease;
-}
-
-sl-icon-button:hover {
-  transform: scale(1.1);
-  color: theme('colors.emerald.600');
-}
-
-sl-icon-button::part(base) {
-  padding: 0;
-}
-
-sl-icon-button::part(base):focus-visible {
-  outline: 3px solid black;
-  outline-offset: 2px;
 }
 
 /* Navigation styles */
