@@ -4,8 +4,8 @@
   "description": "Will Martin's personal website.",
   "type": "module",
   "scripts": {
-    "build": "tailwindcss -i src/css/style.css -o _site/css/style.css && eleventy",
-    "start": "tailwindcss -i src/css/style.css -o _site/css/style.css --watch & eleventy --serve",
+    "build": "tailwindcss -i src/css/style.css -o src/css/output.css && eleventy",
+    "start": "tailwindcss -i src/css/style.css -o src/css/output.css --watch & eleventy --serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {

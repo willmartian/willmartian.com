@@ -4,6 +4,7 @@ node_modules
 # build artefacts
 public
 _site
+src/css/output.css
 
 # secrets and errors
 .env
