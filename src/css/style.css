@@ -20,6 +20,7 @@
   --signal:       #05754f;
   --signal-lift:  #0b9c69;
   --signal-wash:  #edf7f2;
+  --danger:       #a3231b;
   --annotate:     #6f6f66;
   --shadow:       #14150f;
 
@@ -43,6 +44,7 @@
   --signal:       #57e0a0;
   --signal-lift:  #86f5c0;
   --signal-wash:  #16241c;
+  --danger:       #f59a8c;
   --annotate:     #9a9d8c;
   --shadow:       #57e0a0;
 }
@@ -59,6 +61,7 @@
     --signal:       #57e0a0;
     --signal-lift:  #86f5c0;
     --signal-wash:  #16241c;
+    --danger:       #f59a8c;
     --annotate:     #9a9d8c;
     --shadow:       #57e0a0;
   }
@@ -90,6 +93,7 @@
 @property --signal      { syntax: "<color>"; inherits: true; initial-value: #05754f; }
 @property --signal-lift { syntax: "<color>"; inherits: true; initial-value: #0b9c69; }
 @property --signal-wash { syntax: "<color>"; inherits: true; initial-value: #edf7f2; }
+@property --danger      { syntax: "<color>"; inherits: true; initial-value: #a3231b; }
 @property --annotate    { syntax: "<color>"; inherits: true; initial-value: #6f6f66; }
 @property --shadow      { syntax: "<color>"; inherits: true; initial-value: #14150f; }
 
@@ -98,7 +102,7 @@
     --paper 180ms ease, --ink 180ms ease, --ink-soft 180ms ease,
     --grid 180ms ease, --rule 180ms ease, --signal 180ms ease,
     --signal-lift 180ms ease, --signal-wash 180ms ease,
-    --annotate 180ms ease, --shadow 180ms ease;
+    --danger 180ms ease, --annotate 180ms ease, --shadow 180ms ease;
 }
 
 /* ============================================================
@@ -283,6 +287,13 @@
   text-transform: uppercase;
   color: var(--annotate);
 }
+
+/* Inline parentheticals in prose that mark a thing as a risk or a mitigation
+   — "(phishing)" against "(prevents phishing)". Tokens, not fixed colors, so
+   they invert with the theme; the wording carries the meaning on its own, so
+   the color is reinforcement rather than the only signal. */
+.note-risk { color: var(--danger); }
+.note-good { color: var(--signal); }
 
 /* A label with a rule running out to the right margin. */
 .section-rule {
