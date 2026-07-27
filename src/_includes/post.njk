@@ -13,8 +13,8 @@ layout: page.njk
 {{ content | safe }}
 
 {% if comments %}
-  <section class="mt-20">
-    <h2 class="annotate !mt-0 mb-6">Comments</h2>
+  <section class="post-comments">
+    <h2 class="annotate">Comments</h2>
     <script type="module" src="https://cdn.jsdelivr.net/npm/ap-comments@0.1.1/dist/ap-comments.js"></script>
     <ap-comments src="{{ comments }}"></ap-comments>
 
@@ -82,8 +82,11 @@ layout: page.njk
         }
       }
     </script>
-    <p class="mt-6">
-      <a target="_blank" rel="noopener" href="{{ comments }}">Join the conversation on Mastodon →</a>
+    <p class="post-comments-link">
+      {# ↗ not →: the postnav directly below uses horizontal arrows for
+         sequence, so this one needs to read as "leaves the site" instead. #}
+      <a target="_blank" rel="noopener" href="{{ comments }}">Join the conversation on Mastodon
+        <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
     </p>
   </section>
 {% endif %}

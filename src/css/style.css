@@ -31,6 +31,24 @@
   --measure: 66ch;   /* prose */
   --column: 38rem;   /* panels, rules, entry rows */
   --cell: 22px;
+
+  /* Vertical rhythm. Six steps, each roughly 1.5–2x the last, so any two
+     are told apart at a glance. Every vertical gap on the site comes from
+     this list — a gap that needs a value in between means the step is
+     missing, not that this one should be nudged.
+
+       1  label to its value
+       2  heading to the text it introduces
+       3  the paragraph rhythm
+       4  a subsection break
+       5  a section break, and page header to body
+       6  page regions: article to comments, nav, footer            */
+  --sp-1: 0.5rem;
+  --sp-2: 0.75rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2.5rem;
+  --sp-5: 4rem;
+  --sp-6: 6rem;
 }
 
 :root[data-theme="dark"] {
@@ -123,6 +141,7 @@
 
   @media (min-width: 768px) {
     html, body { font-size: 21px; }
+    body { padding-block: var(--sp-5); }
   }
 
   /* Drafting paper. The grid is strongest at the right margin and
@@ -136,7 +155,8 @@
      width — and on a phone, where the column fills the screen, both stops
      fall off the right edge and the grid simply doesn't show. */
   body {
-    @apply px-6 py-10 md:px-12 md:py-14;
+    @apply px-6 md:px-12;
+    padding-block: var(--sp-4);
     --paper-mask-solid: calc(var(--column) + 4rem);
     --paper-mask-end: calc(var(--column) + 32rem);
     background-image:
@@ -183,7 +203,7 @@
   }
 
   h1 {
-    @apply mt-0 mb-6;
+    margin-block: 0 var(--sp-2);
     font-size: clamp(2rem, 5.5vw, 3.1rem);
     font-weight: 700;
     line-height: 1.02;
@@ -191,7 +211,7 @@
   }
 
   h2 {
-    @apply mt-14 mb-4;
+    margin-block: var(--sp-5) var(--sp-2);
     font-size: 1.5em;
     font-weight: 700;
     line-height: 1.15;
@@ -199,26 +219,27 @@
   }
 
   h3 {
-    @apply mt-10 mb-3;
+    margin-block: var(--sp-4) var(--sp-2);
     font-size: 1.2em;
     font-weight: 600;
     letter-spacing: -0.01em;
   }
 
   h4 {
-    @apply mt-8 mb-2;
+    margin-block: var(--sp-3) var(--sp-1);
     font-size: 1em;
     font-weight: 600;
   }
 
   p {
     max-width: var(--measure);
-    @apply mb-6;
+    margin-block: 0 var(--sp-3);
   }
 
   ul, ol {
     max-width: var(--measure);
-    @apply pl-5 mb-6 flex flex-col gap-2;
+    margin-block: 0 var(--sp-3);
+    @apply pl-5 flex flex-col gap-2;
   }
 
   ul { @apply list-disc; }
@@ -231,7 +252,8 @@
   blockquote {
     max-width: var(--measure);
     border-left: 2px solid var(--signal);
-    @apply pl-5 my-8 italic;
+    margin-block: var(--sp-4);
+    @apply pl-5 italic;
     color: var(--ink-soft);
   }
 
@@ -260,7 +282,7 @@
     max-width: var(--measure);
     border: 0;
     border-top: 1px solid var(--rule);
-    @apply my-12;
+    margin-block: var(--sp-5);
   }
 
   code {
@@ -274,7 +296,7 @@
 
   pre {
     max-width: var(--measure);
-    @apply mb-6;
+    margin-block: 0 var(--sp-3);
   }
 
   pre code {
@@ -314,7 +336,8 @@
 
 /* A label with a rule running out to the right margin. */
 .section-rule {
-  @apply flex items-center gap-4 mb-8;
+  @apply flex items-center gap-4;
+  margin-bottom: var(--sp-4);
 }
 
 .section-rule::after {
@@ -363,7 +386,7 @@
 
 .entry:hover { border-left-color: var(--signal); }
 
-.entry-list { @apply flex flex-col gap-8; }
+.entry-list { @apply flex flex-col; gap: var(--sp-4); }
 
 .entry-date {
   font-family: var(--mono);
@@ -393,7 +416,7 @@
   line-height: 1.45;
   color: var(--ink-soft);
   max-width: 52ch;
-  @apply mt-1 mb-0;
+  margin-block: var(--sp-1) 0;
 }
 
 @media (min-width: 640px) {
@@ -403,6 +426,9 @@
 /* Stretch the link over the whole row so the hit area is the row. */
 .entry { position: relative; }
 .entry-title::after { content: ""; @apply absolute inset-0; }
+
+/* The gap between the homepage intro and the writing list. */
+.home-lede-end { margin-bottom: var(--sp-5); }
 
 /* ============================================================
    NAV
@@ -414,7 +440,8 @@
    left cluster reads the same on every page, and it keeps the nav still while
    the wordmark morphs between its hero and masthead sizes. */
 .masthead {
-  @apply flex items-baseline justify-start gap-6 flex-wrap mb-16;
+  @apply flex items-baseline justify-start gap-6 flex-wrap;
+  margin-bottom: var(--sp-5);
 }
 
 /* Centered, not baseline-aligned: an SVG's baseline is its bottom edge, so a
@@ -486,7 +513,7 @@
   font-size: 1.28em;
   line-height: 1.35;
   text-wrap: balance;
-  @apply mb-5;
+  margin-block: 0 var(--sp-3);
 }
 
 .subhead {
@@ -494,10 +521,10 @@
   max-width: 48ch;
   font-size: 0.92rem;
   line-height: 1.55;
-  @apply mb-10;
+  margin-block: 0 var(--sp-4);
 }
 
-figure { max-width: var(--measure); @apply my-10; }
+figure { max-width: var(--measure); margin-block: var(--sp-4); }
 
 figure img {
   @apply block w-full;
@@ -508,20 +535,44 @@ figure figcaption {
   font-size: 0.8rem;
   line-height: 1.5;
   color: var(--ink-soft);
-  @apply mt-3;
+  margin-top: var(--sp-2);
 }
 
+/* The title and this row are one unit, so --sp-2 holds them together and
+   the section-sized gap goes underneath, not between them. */
 .post-meta {
-  @apply flex items-center gap-3 flex-wrap mb-12 pb-4;
-  border-bottom: 1px solid var(--rule);
+  @apply flex items-center gap-3 flex-wrap;
+  margin-block: 0 var(--sp-5);
   max-width: var(--measure);
+}
+
+/* Comments. The heading is an .annotate label, not a document heading, so it
+   drops the h2 section margin and sits tight to the thread it names. */
+.post-comments {
+  margin-top: var(--sp-6);
+}
+
+.post-comments > h2 {
+  margin-block: 0 var(--sp-3);
+}
+
+.post-comments-link {
+  margin-block: var(--sp-3) 0;
 }
 
 /* Previous / next */
 .postnav {
-  @apply grid gap-6 mt-20;
+  @apply grid gap-6;
+  margin-top: var(--sp-6);
   grid-template-columns: 1fr;
   max-width: var(--measure);
+}
+
+/* The --sp-6 above marks leaving the article, so it belongs to whichever
+   block comes first. When comments already took it, this is chrome following
+   chrome and steps down a notch. */
+.post-comments + .postnav {
+  margin-top: var(--sp-5);
 }
 
 @media (min-width: 640px) {
@@ -538,7 +589,8 @@ figure figcaption {
   font-size: 0.95rem;
   line-height: 1.25;
   color: var(--ink);
-  @apply block mt-1;
+  @apply block;
+  margin-top: var(--sp-1);
 }
 
 .postnav a:hover .postnav-title { color: var(--signal); }
@@ -547,9 +599,10 @@ figure figcaption {
    FOOTER
    ============================================================ */
 
+/* Tighter to whatever precedes it than the article-to-chrome break, so the
+   nav and the footer group as one band of site chrome. */
 .site-footer {
-  @apply mt-24 pt-6;
-  border-top: 1px solid var(--rule);
+  margin-top: var(--sp-5);
 }
 
 .footer-links {

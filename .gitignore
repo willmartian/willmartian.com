@@ -6,6 +6,9 @@ public
 _site
 src/css/output.css
 
+# unpublished drafts
+src/pages/posts/libraries-are-infrastructure.md
+
 # secrets and errors
 .env
 .log
