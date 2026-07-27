@@ -49,6 +49,9 @@
   --sp-4: 2.5rem;
   --sp-5: 4rem;
   --sp-6: 6rem;
+
+  /* Shared so the masthead can reserve exactly this much height. */
+  --wordmark-sm: 1.05rem;
 }
 
 :root[data-theme="dark"] {
@@ -365,7 +368,7 @@
 .wordmark .scheme { color: var(--signal); }
 
 .wordmark-lg { font-size: clamp(2.6rem, 9vw, 4.5rem); line-height: 0.95; }
-.wordmark-sm { font-size: 1.05rem; }
+.wordmark-sm { font-size: var(--wordmark-sm); }
 
 /* ============================================================
    INDEX — revision history
@@ -436,11 +439,16 @@
 
 /* Everything clusters at the left edge rather than splitting wordmark-left /
    nav-right. The homepage masthead has no wordmark (the hero carries it), so a
-   split layout would leave the nav floating alone against the right margin. A
-   left cluster reads the same on every page, and it keeps the nav still while
-   the wordmark morphs between its hero and masthead sizes. */
+   split layout would leave the nav floating alone against the right margin.
+
+   That missing wordmark is also why the row needs a floor: without one, the
+   homepage masthead is only as tall as the small nav text while every other
+   page is as tall as the wordmark, and the nav visibly jumps as you move
+   between them. Reserving the wordmark's line box keeps the row one height
+   everywhere, and centring parks the nav at the same spot in it either way. */
 .masthead {
-  @apply flex items-baseline justify-start gap-6 flex-wrap;
+  @apply flex items-center justify-start gap-6 flex-wrap;
+  min-height: calc(var(--wordmark-sm) * 1.6);   /* 1.6 == body line-height */
   margin-bottom: var(--sp-5);
 }
 
