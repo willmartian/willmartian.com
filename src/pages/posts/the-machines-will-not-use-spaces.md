@@ -1,5 +1,5 @@
 ---
-title: "theMachinesWillNotUseSpaces"
+title: "the­Machines­Will­Not­Use­Spaces"
 blurb: "a poem"
 date: 2026-02-17
 comments: "https://fosstodon.org/@willmartian/116088493820459815"

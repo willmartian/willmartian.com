@@ -199,10 +199,26 @@
   /* Pages with a side-by-side layout opt out via `wide: true` frontmatter. */
   main.wide { max-width: 64rem; }
 
+  /* break-word, not anywhere: it only kicks in for a token that cannot fit
+     on a line by itself, so ordinary titles wrap between words as usual. A
+     camelCase title is a single 27-character word with no break opportunity
+     in it, and at the h1 size that overruns a phone screen. */
   h1, h2, h3, h4 {
     font-family: var(--display);
     color: var(--ink);
     text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  /* Long unbroken titles (see theMachinesWillNotUseSpaces) get split on narrow
+     screens and left whole on wide ones. Below this width overflow-wrap allows
+     the break and the soft hyphens in the title mark where it lands; above it,
+     both are switched off so the title stays on one line. */
+  @media (min-width: 768px) {
+    h1, h2, h3, h4, .entry-title, .postnav-title {
+      overflow-wrap: normal;
+      hyphens: none;
+    }
   }
 
   h1 {
@@ -424,6 +440,7 @@
   letter-spacing: -0.01em;
   color: var(--ink);
   text-decoration: none;
+  overflow-wrap: break-word;
 }
 
 .entry:hover .entry-title { color: var(--signal); }
@@ -612,6 +629,7 @@ figure figcaption {
   font-size: 0.95rem;
   line-height: 1.25;
   color: var(--ink);
+  overflow-wrap: break-word;
   @apply block;
   margin-top: var(--sp-1);
 }
