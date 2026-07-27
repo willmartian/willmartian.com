@@ -1,6 +1,6 @@
 ---
 title: "Only work on bug tickets"
-# blurb: ""
+blurb: "Finished tickets take their context with them. Bug tickets are the only ones that come back."
 date: 2026-02-09
 # comments: "https://fosstodon.org/@willmartian/115073408360995471"
 eleventyExcludeFromCollections: true

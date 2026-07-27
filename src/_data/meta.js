@@ -1,10 +1,11 @@
 export default {
   url: process.env.URL || "http://localhost:8080",
-  siteName: "WillMartian.com",
+  siteName: "willmartian.com",
   siteDescription:
-    "Will's personal website.",
+    "Will Martin is a design engineer in Atlanta. He builds design systems, component libraries, and the accessibility work underneath them.",
   authorName: "Will Martin",
-  repo: "https://github.com",
-  Twitter: "@will_martian",
-  GitHub: "willmartian"
+  repo: "https://github.com/willmartian/willmartian.com",
+  twitter: "@will_martian",
+  github: "willmartian",
+  mastodon: "https://fosstodon.org/@willmartian"
 };

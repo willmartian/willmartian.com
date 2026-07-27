@@ -1,34 +1,35 @@
 ---
-  title: WillMartian.com
+  title: Will Martin — Design Engineer
   layout: base.njk
 ---
 
-<main class="flex-1">
-  <h1 class="mb-4 block"><span>w://</span> martian</h1>
+<main id="main">
 
-  <div class="max-w-2xl mb-12">
-    <p class="!mb-4 text-base">
-      I'm a software engineer and designer who thinks about UI, open source, and how we build for the web.
-    </p>
+  <h1 class="rise rise-1">
+    <a href="{{ '/' | url }}" class="wordmark wordmark-lg"><span class="scheme">w://</span>martian</a>
+  </h1>
 
-    <p>
-      <a class="font-semibold" href="/about/">more about me →</a>
-    </p>
-  </div>
+  <p class="rise rise-2">
+    I'm a software engineer and designer in Atlanta. I work on design systems,
+    and I write here about UI, open source, and how we build for the web.
+  </p>
 
-  <nav class="mt-16">
-    <div class="text-sm text-gray-500 font-mono mb-4">$ ls posts/</div>
-    <div class="flex flex-col gap-3">
+  <p class="rise rise-3 mb-16">
+    <a href="/about/">more about me →</a>
+  </p>
+
+  <section class="rise rise-4">
+    <div class="entry-list">
       {% for post in collections.posts | reverse %}
-        <article class="border-l-2 border-gray-300 pl-4 hover:border-emerald-500 transition-colors">
-          <h3 class="!mt-0 !mb-1 text-lg">
-            <a href="{{ post.url }}" class="text-black hover:text-emerald-600">{{ post.data.title }}</a>
-          </h3>
-          <div class="text-sm text-gray-600">
-            {{ post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}
-          </div>
+        <article class="entry">
+          <time class="entry-date" datetime="{{ post.date | isoDate }}">{{ post.date | revDate }}</time>
+          <a href="{{ post.url }}" class="entry-title">{{ post.data.title }}</a>
+          {% if post.data.blurb %}
+            <p class="entry-blurb">{{ post.data.blurb }}</p>
+          {% endif %}
         </article>
       {% endfor %}
     </div>
-  </nav>
+  </section>
+
 </main>

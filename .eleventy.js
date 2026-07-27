@@ -21,13 +21,25 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addWatchTarget("./src/css/style.css");
-  eleventyConfig.addPassthroughCopy("./src/fonts");
-  eleventyConfig.addPassthroughCopy("./src/img");
-  eleventyConfig.addPassthroughCopy("./src/favicon.png");
+  eleventyConfig.addPassthroughCopy("./src/favicon.svg");
   eleventyConfig.addPassthroughCopy("./src/files");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
 
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
+  /** 2026-02-17 — for <time datetime> */
+  eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
+
+  /** 2026.02.17 — the index reads as a revision history, so dates are fixed-width. */
+  eleventyConfig.addFilter("revDate", (d) =>
+    new Date(d).toISOString().slice(0, 10).replace(/-/g, ".")
+  );
+
+  /** Reading time, derived from the rendered post body. */
+  eleventyConfig.addFilter("readingTime", (content) => {
+    const words = String(content).replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
+    return `${Math.max(1, Math.round(words / 220))} min read`;
+  });
 
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);

@@ -2,9 +2,7 @@
 layout: base.njk
 ---
 
-<header>
-  <h1 class="mb-4 block"><a href="{{ '/' | url }}">w://</a> {{ title }}</h1>
-</header>
-<main class="flex-1">
+<main id="main"{% if wide %} class="wide"{% endif %}>
+  <h1>{{ title }}</h1>
   {{ content | safe }}
 </main>

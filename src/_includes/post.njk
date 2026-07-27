@@ -1,43 +1,111 @@
 ---
 layout: page.njk
 ---
-<div class="text-sm text-gray-600 mb-12">
-    <time datetime="{{ page.date }}">{{ page.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</time>
 
+<div class="post-meta">
+  <time class="annotate" datetime="{{ page.date | isoDate }}">
+    {{ page.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}
+  </time>
+  <span class="annotate">·</span>
+  <span class="annotate">{{ content | readingTime }}</span>
 </div>
 
 {{ content | safe }}
 
 {% if comments %}
-    <div class="mt-16">
-        <h3 class="text-lg font-semibold mb-4">Comments</h3>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/ap-comments@0.1.1/dist/ap-comments.js"></script>
-        <ap-comments src="{{ comments }}"></ap-comments>
-        <div class="text-sm mt-4 text-gray-600"><a target="_blank" href="{{ comments }}">Join the conversation on Mastodon</a></div>
-    </div>
+  <section class="mt-20">
+    <h2 class="annotate !mt-0 mb-6">Comments</h2>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ap-comments@0.1.1/dist/ap-comments.js"></script>
+    <ap-comments src="{{ comments }}"></ap-comments>
+
+    {# ap-comments only exposes two custom properties and six ::part() hooks,
+       which leaves its hardcoded display-name colour and the mention links
+       inside .content unthemeable. Custom properties do cross the shadow
+       boundary, so adopt a stylesheet into the shadow root and use the site
+       tokens directly. No-ops on browsers without adoptedStyleSheets. #}
+    <script type="module">
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync(`
+        :host { max-width: 100%; }
+
+        /* Only .nested-replies draws a line. Giving the article one too
+           puts a second rule at a different offset on every level, which
+           is what threw the alignment off. */
+        article.comment {
+          padding: 0;
+          margin-bottom: 1.35rem;
+        }
+
+        /* The component ships 1em above and below .content plus another
+           1em under .footer, which compounds into a large gap per comment.
+           Collapse the footer's and keep the rest of the breathing room here. */
+        .content { margin-block: 0.6em 0.55em; }
+        .footer { margin-block-end: 0; }
+
+        .name {
+          color: var(--ink);
+          font-family: var(--display);
+          font-size: 0.95em;
+        }
+
+        .content { color: var(--ink); }
+        .content a { color: var(--signal); text-decoration: none; }
+        .content a:hover { text-decoration: underline; }
+
+        .muted, .time, .action-bar > * { color: var(--ink-soft); }
+
+        .author-link {
+          font-family: var(--mono);
+          font-size: 0.75em;
+          letter-spacing: 0.02em;
+        }
+
+        .avatar, .avatar > img { width: 34px; height: 34px; border-radius: 3px; }
+        .avatar:hover::before { background: transparent; }
+
+        /* One guide per depth, same offset every level, so they stack
+           evenly as the thread nests. */
+        .nested-replies {
+          margin-left: 0.3rem;
+          padding-left: 0.75rem;
+          border-left: 2px solid var(--rule);
+        }
+        #comment-list { margin-top: 0; }
+      `);
+
+      await customElements.whenDefined("ap-comments");
+      for (const el of document.querySelectorAll("ap-comments")) {
+        await el.updateComplete;
+        const root = el.shadowRoot;
+        if (root?.adoptedStyleSheets) {
+          root.adoptedStyleSheets = [...root.adoptedStyleSheets, sheet];
+        }
+      }
+    </script>
+    <p class="mt-6">
+      <a target="_blank" rel="noopener" href="{{ comments }}">Join the conversation on Mastodon →</a>
+    </p>
+  </section>
 {% endif %}
 
-{# Post navigation #}
-<nav class="mt-16">
-  <div class="flex justify-between items-start gap-8">
-    <div class="flex-1">
-      {%- set previousPost = collections.posts | getPreviousCollectionItem(page) %}
-      {% if previousPost %}
-        <a href="{{ previousPost.url }}" class="block group">
-          <div class="text-sm text-gray-600 mb-1">← Previous</div>
-          <div class="font-semibold group-hover:text-emerald-600">{{ previousPost.data.title }}</div>
-        </a>
-      {% endif %}
-    </div>
+<nav class="postnav" aria-label="More posts">
+  <div class="postnav-prev">
+    {%- set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+    {% if previousPost %}
+      <a href="{{ previousPost.url }}">
+        <span class="annotate">← Previous</span>
+        <span class="postnav-title">{{ previousPost.data.title }}</span>
+      </a>
+    {% endif %}
+  </div>
 
-    <div class="flex-1 text-right">
-      {%- set nextPost = collections.posts | getNextCollectionItem(page) %}
-      {% if nextPost %}
-        <a href="{{ nextPost.url }}" class="block group">
-          <div class="text-sm text-gray-600 mb-1">Next →</div>
-          <div class="font-semibold group-hover:text-emerald-600">{{ nextPost.data.title }}</div>
-        </a>
-      {% endif %}
-    </div>
+  <div class="postnav-next">
+    {%- set nextPost = collections.posts | getNextCollectionItem(page) %}
+    {% if nextPost %}
+      <a href="{{ nextPost.url }}">
+        <span class="annotate">Next →</span>
+        <span class="postnav-title">{{ nextPost.data.title }}</span>
+      </a>
+    {% endif %}
   </div>
 </nav>

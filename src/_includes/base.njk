@@ -2,16 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}{% if page.url != '/' %} | {{ meta.siteName }}{% endif %}</title>
 
+  {# The browser paints its canvas from `color-scheme` before any stylesheet
+     loads, so this has to be declared in markup — a `color-scheme` that only
+     exists in CSS leaves a white canvas for the first frame, which reads as a
+     flash against a dark palette. #}
+  <meta name="color-scheme" content="light dark">
+
+  {# Resolve the theme before first paint so there is no flash. Sets the
+     inline color-scheme as well as the attribute: the attribute drives our
+     palette variables, but only color-scheme moves the canvas underneath, and
+     an explicit choice has to beat the OS setting the meta tag defers to. #}
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") {
+          document.documentElement.setAttribute("data-theme", saved);
+          document.documentElement.style.colorScheme = saved;
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <meta name="description" content="{{ blurb or desc or meta.siteDescription }}">
   <meta name="generator" content="{{ eleventy.generator }}">
-  
-  {# Fonts #}
+  <link rel="canonical" href="{{ meta.url }}{{ page.url }}">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="{{ meta.siteName }}" href="/feed.xml">
+
+  {# Fonts: one request.
+     Inika          — headings, wordmark and prose
+     JetBrains Mono — the annotation layer (labels, dates, code) #}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
   <link rel="stylesheet" href="{{ '/css/output.css' | url }}">
 
@@ -19,23 +46,61 @@
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
   {% endif %}
 
-  <!-- Open graph -->
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="{{ meta.siteName }}">
   <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="{{ blurb or desc or title }}">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://willmartian.com/files/martianLogo.png"/>
-  <meta property="og:image:width" content="1140" />
-  <meta property="og:image:height" content="544" />
+  <meta property="og:description" content="{{ blurb or desc or meta.siteDescription }}">
+  <meta property="og:type" content="{% if page.url.startsWith('/posts/') %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ meta.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ meta.url }}/files/martianLogo.png">
+  <meta property="og:image:width" content="1140">
+  <meta property="og:image:height" content="544">
+
   <!-- Twitter -->
-  <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="{{ twitter }}">
-  <meta name="twitter:description" content="{{ blurb or desc or title }}">
-  <meta name="twitter:image" content="https://willmartian.com/files/martianLogo.png">
-  <meta name="twitter:creator" content="{{ twitter }}">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ blurb or desc or meta.siteDescription }}">
+  <meta name="twitter:image" content="{{ meta.url }}/files/martianLogo.png">
+  <meta name="twitter:site" content="{{ meta.twitter }}">
+  <meta name="twitter:creator" content="{{ meta.twitter }}">
 </head>
-<body class="min-h-screen flex flex-col">
-      {{ content | safe }}
-      {% include "footer.njk" %}
+<body>
+  <a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>
+
+  {% include "nav.njk" %}
+
+  {{ content | safe }}
+
+  {% include "footer.njk" %}
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector("[data-theme-toggle]");
+      if (!btn) return;
+
+      function current() {
+        return root.getAttribute("data-theme") ||
+          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+
+      {# The visible glyph is swapped by CSS off data-theme; the script only
+         has to keep the accessible name in sync with it. #}
+      function label() {
+        var next = current() === "dark" ? "light" : "dark";
+        btn.setAttribute("aria-label", "Switch to " + next + " theme");
+      }
+
+      label();
+
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        root.style.colorScheme = next;   {# keep the canvas in step with the palette #}
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label();
+      });
+    })();
+  </script>
 </body>
 </html>
