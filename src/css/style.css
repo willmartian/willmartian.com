@@ -15,7 +15,7 @@
   --paper:        #fbfbf9;
   --ink:          #14150f;
   --ink-soft:     #55574c;
-  --grid:         #dedecf;
+  --grid:         #e9e8dc;
   --rule:         #cfcfc4;
   --signal:       #05754f;
   --signal-lift:  #0b9c69;
@@ -88,7 +88,7 @@
 @property --paper       { syntax: "<color>"; inherits: true; initial-value: #fbfbf9; }
 @property --ink         { syntax: "<color>"; inherits: true; initial-value: #14150f; }
 @property --ink-soft    { syntax: "<color>"; inherits: true; initial-value: #55574c; }
-@property --grid        { syntax: "<color>"; inherits: true; initial-value: #dedecf; }
+@property --grid        { syntax: "<color>"; inherits: true; initial-value: #e9e8dc; }
 @property --rule        { syntax: "<color>"; inherits: true; initial-value: #cfcfc4; }
 @property --signal      { syntax: "<color>"; inherits: true; initial-value: #05754f; }
 @property --signal-lift { syntax: "<color>"; inherits: true; initial-value: #0b9c69; }
@@ -126,15 +126,25 @@
   }
 
   /* Drafting paper. The grid is strongest at the right margin and
-     fades out under the text column so prose stays legible. */
+     fades out under the text column so prose stays legible.
+
+     The stops are measured from the left edge in the same units as the
+     column, not as viewport percentages. A percentage drifts: the column is a
+     fixed width, so on a wider screen it covers a smaller fraction while the
+     percentage stop keeps sliding left into the text. Anchoring to --column
+     means the grid always begins just past where the text can reach, at any
+     width — and on a phone, where the column fills the screen, both stops
+     fall off the right edge and the grid simply doesn't show. */
   body {
     @apply px-6 py-10 md:px-12 md:py-14;
+    --paper-mask-solid: calc(var(--column) + 4rem);
+    --paper-mask-end: calc(var(--column) + 32rem);
     background-image:
       linear-gradient(
         to right,
         var(--paper) 0%,
-        var(--paper) 18%,
-        transparent 62%
+        var(--paper) var(--paper-mask-solid),
+        transparent var(--paper-mask-end)
       ),
       repeating-linear-gradient(
         0deg,
@@ -148,6 +158,13 @@
       );
     background-size: 100% 100%, var(--cell) var(--cell), var(--cell) var(--cell);
     background-attachment: fixed;
+  }
+
+  /* Wide pages run their content out to 64rem, so the grid has to start
+     further right or it lands under the second column. */
+  body:has(main.wide) {
+    --paper-mask-solid: 68rem;
+    --paper-mask-end: 96rem;
   }
 
   /* One content column. Panels, rules and entry rows fill it; prose sits
