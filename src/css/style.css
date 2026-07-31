@@ -23,6 +23,8 @@
   --danger:       #a3231b;
   --annotate:     #6f6f66;
   --shadow:       #14150f;
+  --tag-blog:     #9c6b17;
+  --tag-poem:     #6b4fa0;
 
   --display: "Inika", Georgia, serif;
   --body:    "Inika", Georgia, serif;
@@ -85,6 +87,8 @@
     --danger:       #f59a8c;
     --annotate:     #9a9d8c;
     --shadow:       #57e0a0;
+    --tag-blog:     #e8b969;
+    --tag-poem:     #b79bef;
   }
 }
 
@@ -117,13 +121,16 @@
 @property --danger      { syntax: "<color>"; inherits: true; initial-value: #a3231b; }
 @property --annotate    { syntax: "<color>"; inherits: true; initial-value: #6f6f66; }
 @property --shadow      { syntax: "<color>"; inherits: true; initial-value: #14150f; }
+@property --tag-blog    { syntax: "<color>"; inherits: true; initial-value: #9c6b17; }
+@property --tag-poem    { syntax: "<color>"; inherits: true; initial-value: #6b4fa0; }
 
 :root {
   transition:
     --paper 180ms ease, --ink 180ms ease, --ink-soft 180ms ease,
     --grid 180ms ease, --rule 180ms ease, --signal 180ms ease,
     --signal-lift 180ms ease, --signal-wash 180ms ease,
-    --danger 180ms ease, --annotate 180ms ease, --shadow 180ms ease;
+    --danger 180ms ease, --annotate 180ms ease, --shadow 180ms ease,
+    --tag-blog 180ms ease, --tag-poem 180ms ease;
 }
 
 /* ============================================================
@@ -408,14 +415,24 @@
    ============================================================ */
 
 .entry {
-  @apply grid gap-x-6 gap-y-1 pl-4;
+  @apply grid gap-x-5 gap-y-1 pl-4;
   grid-template-columns: 1fr;
   border-left: 2px solid var(--rule);
   transition: border-color 140ms ease;
 }
 
+/* Date+title on row one, tag+blurb on row two, so a taller left column
+   (date stacked over tag) can't push the blurb down with it. */
 @media (min-width: 640px) {
-  .entry { grid-template-columns: 7.5rem 1fr; }
+  .entry {
+    grid-template-columns: 5rem 1fr;
+    grid-template-areas: "date title" "tag blurb";
+  }
+
+  .entry-date { grid-area: date; }
+  .entry-tag { grid-area: tag; }
+  .entry-title { grid-area: title; }
+  .entry-blurb { grid-area: blurb; }
 }
 
 .entry:hover { border-left-color: var(--signal); }
@@ -430,6 +447,18 @@
   color: var(--annotate);
   font-variant-numeric: tabular-nums;
   @apply whitespace-nowrap;
+}
+
+.entry-tag {
+  align-self: end;
+  text-transform: lowercase;
+}
+
+.entry-tag-poem { color: var(--tag-poem); }
+.entry-tag-blog { color: var(--tag-blog); }
+
+.entry-tag::before {
+  content: "#";
 }
 
 .entry-title {
@@ -452,10 +481,7 @@
   color: var(--ink-soft);
   max-width: 52ch;
   margin-block: var(--sp-1) 0;
-}
-
-@media (min-width: 640px) {
-  .entry-blurb { grid-column: 2; }
+  align-self: end;
 }
 
 /* Stretch the link over the whole row so the hit area is the row. */

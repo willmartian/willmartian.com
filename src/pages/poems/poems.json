@@ -1,0 +1,5 @@
+{
+  "layout": "poem.njk",
+  "permalink": "poems/{{ page.fileSlug }}/",
+  "override:tags": ["poems"]
+}

@@ -41,6 +41,13 @@ export default function (eleventyConfig) {
     return `${Math.max(1, Math.round(words / 220))} min read`;
   });
 
+  /** Posts and poems, interleaved by date, for the homepage's single timeline. */
+  eleventyConfig.addCollection("writing", (collectionApi) =>
+    [...collectionApi.getFilteredByTag("posts"), ...collectionApi.getFilteredByTag("poems")].sort(
+      (a, b) => a.date - b.date
+    )
+  );
+
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(pluginRss);
 

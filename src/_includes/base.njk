@@ -50,7 +50,7 @@
   <meta property="og:site_name" content="{{ meta.siteName }}">
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ blurb or desc or meta.siteDescription }}">
-  <meta property="og:type" content="{% if page.url.startsWith('/posts/') %}article{% else %}website{% endif %}">
+  <meta property="og:type" content="{% if page.url.startsWith('/posts/') or (page.url.startsWith('/poems/') and page.url != '/poems/') %}article{% else %}website{% endif %}">
   <meta property="og:url" content="{{ meta.url }}{{ page.url }}">
   <meta property="og:image" content="{{ meta.url }}/files/martianLogo.png">
   <meta property="og:image:width" content="1140">

@@ -19,12 +19,17 @@
 
   <section class="rise rise-4">
     <div class="entry-list">
-      {% for post in collections.posts | reverse %}
+      {% for item in collections.writing | reverse %}
         <article class="entry">
-          <time class="entry-date" datetime="{{ post.date | isoDate }}">{{ post.date | revDate }}</time>
-          <a href="{{ post.url }}" class="entry-title">{{ post.data.title }}</a>
-          {% if post.data.blurb %}
-            <p class="entry-blurb">{{ post.data.blurb }}</p>
+          <time class="entry-date" datetime="{{ item.date | isoDate }}">{{ item.date | revDate }}</time>
+          <a href="{{ item.url }}" class="entry-title">{{ item.data.title }}</a>
+          {% if "poems" in item.data.tags %}
+            <span class="entry-tag entry-tag-poem annotate">poem</span>
+          {% else %}
+            <span class="entry-tag entry-tag-blog annotate">blog</span>
+          {% endif %}
+          {% if item.data.blurb %}
+            <p class="entry-blurb">{{ item.data.blurb }}</p>
           {% endif %}
         </article>
       {% endfor %}
