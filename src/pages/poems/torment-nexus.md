@@ -14,11 +14,11 @@ It perfectly describes what has vexed us.
 In it there's this device that is quite cool,
 that can think and speak just like you and me.
 The ultimate productivity tool!
-So, as I read its value I could see.
+So, as I read, its value I could see.
 
 Why <i>not</i> create this miracle machine
 to help us conquer all that is mundane?
-Like reading or writing? Boring routine.
+Like reading or writing? Boring. Routine.
 Imagine all that we could stand to gain!
 
 So thank you for listening to my pitch;
