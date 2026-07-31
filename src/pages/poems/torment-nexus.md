@@ -2,7 +2,7 @@
 title: "Torment Nexus"
 blurb: "a sonnet"
 date: 2026-07-31
-# comments: "https://fosstodon.org/@willmartian/116088493820459815"
+comments: "https://fosstodon.org/@willmartian/117015584706995982"
 ---
 
 <pre class="py-4 leading-relaxed">
