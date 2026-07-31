@@ -21,6 +21,6 @@ to help us conquer all that is mundane?
 Like reading or writing? Boring routine.
 Imagine all that we could stand to gain!
 
-So thank you for listening to my pitch!
+So thank you for listening to my pitch;
 I trust you see how much this will enrich.
 </pre>

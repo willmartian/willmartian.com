@@ -7,7 +7,6 @@
 
   <nav class="nav-links" aria-label="Main">
     <a href="{{ '/' | url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Writing</a>
-    <a href="{{ '/poems/' | url }}" class="nav-link {% if page.url == '/poems/' %}active{% endif %}">Poems</a>
     <a href="{{ '/about/' | url }}" class="nav-link {% if page.url == '/about/' %}active{% endif %}">About</a>
     {# Both icons ship in the markup and CSS picks which one shows, so the
        right glyph is correct at first paint even before the script runs.
