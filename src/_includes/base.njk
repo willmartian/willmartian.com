@@ -52,15 +52,11 @@
   <meta property="og:description" content="{{ blurb or desc or meta.siteDescription }}">
   <meta property="og:type" content="{% if page.url.startsWith('/posts/') or page.url.startsWith('/poems/') %}article{% else %}website{% endif %}">
   <meta property="og:url" content="{{ meta.url }}{{ page.url }}">
-  <meta property="og:image" content="{{ meta.url }}/files/martianLogo.png">
-  <meta property="og:image:width" content="1140">
-  <meta property="og:image:height" content="544">
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ blurb or desc or meta.siteDescription }}">
-  <meta name="twitter:image" content="{{ meta.url }}/files/martianLogo.png">
   <meta name="twitter:site" content="{{ meta.twitter }}">
   <meta name="twitter:creator" content="{{ meta.twitter }}">
 </head>
