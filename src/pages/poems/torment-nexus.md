@@ -18,7 +18,7 @@ So, as I read, its value I could see.
 
 Why <i>not</i> create this miracle machine
 to help us conquer all that is mundane?
-Like reading or writing? Boring. Routine.
+Like reading and writing. Boring. Routine.
 Imagine all that we could stand to gain!
 
 So thank you for listening to my pitch;
