@@ -20,6 +20,15 @@ export default function (eleventyConfig) {
     fs.writeFileSync(outputPath, result.css);
   });
 
+  /** The 404 page is the "404" poem itself, served verbatim at /404.html.
+      Eleventy gives a page one permalink, so copy the built poem into place. */
+  eleventyConfig.on("eleventy.after", async ({ dir }) => {
+    const poem = path.join(dir.output, "poems", "404", "index.html");
+    if (fs.existsSync(poem)) {
+      fs.copyFileSync(poem, path.join(dir.output, "404.html"));
+    }
+  });
+
   eleventyConfig.addWatchTarget("./src/css/style.css");
   eleventyConfig.addPassthroughCopy("./src/favicon.svg");
   eleventyConfig.addPassthroughCopy("./src/files");
