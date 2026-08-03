@@ -1,5 +1,5 @@
 ---
-title: "Kata"
+title: "Haiku is kata"
 blurb: "a haiku"
 date: 2026-08-03
 # comments: "https://fosstodon.org/@willmartian/117015587340205977"

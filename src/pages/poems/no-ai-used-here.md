@@ -1,12 +1,12 @@
 ---
-title: "404"
+title: "No AI used here"
 blurb: "a haiku"
-date: 2026-08-02
+date: 2026-08-03
 # comments: "https://fosstodon.org/@willmartian/117015587340205977"
 ---
 
 <pre class="py-4 leading-relaxed">
-404: Not Found
-Like, what are you doing here?
-I think you are lost.
+No AI used here
+Em dash is from my own brain—
+Poor writing my own
 </pre>
